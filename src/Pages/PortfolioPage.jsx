@@ -119,33 +119,36 @@ const PortfolioPage = () => {
 
   return (
     <MainLayout>
-      <div className="bg-black py-20 text-white">
-        <div className=" text-center py-6">
-          <h1 className="">Projects</h1>
-          <div className="py-4">
-            {isAdmin && (
-              <Modal
-                id={"addProjectModal"}
-                apiName="portfolio"
-                buttonName={"Add Project"}
-                heading={"Add a New Project"}
-                input={[
-                  ["name"],
-                  ["technologies"],
-                  ["price"],
-                  ["pages"],
-                  ["description"],
-                ]}
-              ></Modal>
-            )}
-          </div>
+      {isLoading ? (
+        <div
+          className={
+            "h-screen text-white bg-black justify-center items-center flex"
+          }
+        >
+          <LoadingInfinite> </LoadingInfinite>
         </div>
-
-        {isLoading ? (
-          <div className={"h-screen flex justify-center items-center"}>
-            <LoadingInfinite></LoadingInfinite>
+      ) : (
+        <div className="bg-black py-20 text-white">
+          <div className=" text-center py-6">
+            <h1 className="">Projects</h1>
+            <div className="py-4">
+              {isAdmin && (
+                <Modal
+                  id={"addProjectModal"}
+                  apiName="portfolio"
+                  buttonName={"Add Project"}
+                  heading={"Add a New Project"}
+                  input={[
+                    ["name"],
+                    ["technologies"],
+                    ["price"],
+                    ["pages"],
+                    ["description"],
+                  ]}
+                ></Modal>
+              )}
+            </div>
           </div>
-        ) : (
           <div className="grid grid-cols-3 max-w-[85%] mx-auto gap-6 text-black">
             {projects?.map((project, idx) => (
               <div key={idx} className={`card bg-base-100 shadow-xl`}>
@@ -167,8 +170,8 @@ const PortfolioPage = () => {
               </div>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </MainLayout>
   );
 };

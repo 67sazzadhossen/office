@@ -1,7 +1,6 @@
 "use client";
 import Navbar from "@/Components/Shared/Navbar/Navbar";
 import useLoadData from "@/Hooks/useLoadData";
-import React from "react";
 
 const MainLayout = ({ children }) => {
   const [, , nav = isLoading] = useLoadData("navbar");

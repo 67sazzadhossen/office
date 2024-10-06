@@ -1,4 +1,5 @@
 import { connectDb } from "@/Services/connectDb";
+import { NextResponse } from "next/server";
 
 export const GET = async (request) => {
   console.log("params", request);
@@ -6,8 +7,8 @@ export const GET = async (request) => {
     const db = await connectDb();
     const usersCollection = db.collection("usersCollection");
 
-    return Response.json({ message: "Success" });
+    return NextResponse.json({ message: "Success" });
   } catch (error) {
-    return Response.json({ message: "error" });
+    return NextResponse.json({ message: "error" });
   }
 };

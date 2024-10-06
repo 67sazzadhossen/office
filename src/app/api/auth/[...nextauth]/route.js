@@ -60,46 +60,99 @@ const handler = NextAuth({
       clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_SECRET,
     }),
   ],
-  callbacks: {
-    async signIn({ user, account, credentials }) {
-      if (credentials) {
-        return user;
-      }
+  // callbacks: {
+  //   async signIn({ user, account, credentials }) {
+  //     if (credentials) {
+  //       return user;
+  //     }
 
+  //     if (
+  //       account.provider === "google" ||
+  //       account.provider === "github" ||
+  //       account.provider === "facebook"
+  //     ) {
+  //       const { name, email, image } = user;
+  //       try {
+  //         const db = await connectDb();
+  //         const userCollection = db.collection("usersCollection");
+  //         const existingUser = await userCollection.findOne({ email });
+  //         if (!existingUser) {
+  //           const res = await userCollection.insertOne({
+  //             ...user,
+  //             role: "client",
+  //           });
+  //           return user;
+  //         } else {
+  //           return user;
+  //         }
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   },
+  //   async jwt({ token, user }) {
+  //     if (user) {
+  //       token.role = user.role; // Store the user's role in the JWT token
+  //     }
+  //     return token;
+  //   },
+
+  //   async session({ session, token }) {
+  //     if (token) {
+  //       session.user.role = token.role; // Attach the role to the session object
+  //     }
+  //     return session;
+  //   },
+  // },
+
+  callbacks: {
+    async signIn({ user, account, profile, email }) {
       if (
         account.provider === "google" ||
         account.provider === "github" ||
         account.provider === "facebook"
       ) {
-        const { name, email, image } = user;
+        const { email } = user;
         try {
           const db = await connectDb();
-          const userCollection = db.collection("userCollection");
+          const userCollection = db.collection("usersCollection");
+
+          // Check if the user already exists
           const existingUser = await userCollection.findOne({ email });
           if (!existingUser) {
-            const res = await userCollection.insertOne({
+            // If the user does not exist, insert them into the database with a default role
+            await userCollection.insertOne({
               ...user,
-              role: "client",
+              role: "client",  // Assign default role
             });
-            return user;
+            user.role = "client";  // Set role for the current session
           } else {
-            return user;
+            // If the user exists, get their role
+            user.role = existingUser.role || "client";  // Set role for the current session
           }
+
+          return true; // Proceed with sign in
         } catch (error) {
-          console.log(error);
+          console.log("Error in signIn callback:", error);
+          return false; // Reject sign in
         }
       }
+
+      return true; // Proceed with sign in for credentials provider
     },
+    
     async jwt({ token, user }) {
+      // If a user object exists (i.e., the user just logged in), assign the role
       if (user) {
-        token.role = user.role; // Store the user's role in the JWT token
+        token.role = user.role;
       }
       return token;
     },
 
     async session({ session, token }) {
+      // Attach role to session from the token
       if (token) {
-        session.user.role = token.role; // Attach the role to the session object
+        session.user.role = token.role;
       }
       return session;
     },

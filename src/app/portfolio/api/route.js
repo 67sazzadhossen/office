@@ -1,4 +1,5 @@
 import { connectDb } from "@/Services/connectDb";
+import { NextResponse } from "next/server";
 
 export const PUT = async(request)=> {
     const data = await request.json();
@@ -7,9 +8,9 @@ export const PUT = async(request)=> {
         const db = await connectDb();
         const projectCollection = db.collection("projectCollection")
         const res = await projectCollection.insertOne(data);
-        return Response.json({message: "success"})
+        return NextResponse.json({message: "success"})
     } catch (error) {
-        return Response.json(error)
+        return NextResponse.json(error)
     }
 }
 
@@ -19,8 +20,8 @@ export const GET = async(request)=> {
         const db = await connectDb();
         const projectCollection = db.collection("projectCollection")
         const res = await projectCollection.find().toArray();
-        return Response.json({message: "success",data: res});
+        return NextResponse.json({message: "success",data: res});
     } catch (error) {
-        return Response.json(error)
+        return NextResponse.json(error)
     }
 }

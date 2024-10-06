@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useLoggedUser from "@/Hooks/useLoggedUser";
+import SocialLogin from "@/Components/Shared/SocialLogin/SocialLogin";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
@@ -29,7 +30,7 @@ const LoginPage = () => {
   };
   return (
     <MainLayout>
-      <div className="min-h-screen bg-black text-white flex justify-center items-center">
+      <div className="min-h-screen bg-black text-white flex justify-center flex-col items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className=" w-1/3 border border-gray-800 p-8 rounded-xl backdrop-blur-lg shadow-inner"
@@ -65,6 +66,10 @@ const LoginPage = () => {
             <button className="btn btn-primary">Login</button>
           </div>
         </form>
+        <div className={"divider divider-neutral w-1/4 mx-auto"}>
+          Or Login With
+        </div>
+        <SocialLogin></SocialLogin>
       </div>
     </MainLayout>
   );

@@ -1,4 +1,5 @@
 import { connectDb } from "@/Services/connectDb";
+import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
   const data = await request.json();
@@ -9,11 +10,11 @@ export const POST = async (request) => {
     const exist = await usersCollection.findOne({ email: data.email });
     if (!exist) {
       const res = await usersCollection.insertOne(data);
-      return Response.json({ message: "successfully created", status: 200 });
+      return NextResponse.json({ message: "successfully created", status: 200 });
     }
-    return Response.json({ message: "Email already exists", status: 409 });
+    return NextResponse.json({ message: "Email already exists", status: 409 });
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };
 export const PATCH = async (request) => {
@@ -29,8 +30,8 @@ export const PATCH = async (request) => {
     const res = await usersCollection.updateOne(filter, updatedDoc, {
       upsert: true,
     });
-    return Response.json({ message: "Successfully updated", status: 200 });
+    return NextResponse.json({ message: "Successfully updated", status: 200 });
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };

@@ -1,4 +1,5 @@
 import { connectDb } from "@/Services/connectDb";
+import { NextResponse } from "next/server";
 
 export const PUT = async (request) => {
   const data = await request.json();
@@ -15,9 +16,9 @@ export const PUT = async (request) => {
     const res = await logoCollection.updateOne(filter, updatedDoc, {
       upsert: true,
     });
-    return Response.json({ message: "success" });
+    return NextResponse.json({ message: "success" });
   } catch (error) {
-    return Response.json({ message: "error" });
+    return NextResponse.json({ message: "error" });
   }
 };
 
@@ -27,8 +28,8 @@ export const GET = async (request) => {
     const logoCollection = db.collection("logoCollection");
     const res = await logoCollection.find().toArray();
 
-    return Response.json({ message: "success", data: res });
+    return NextResponse.json({ message: "success", data: res });
   } catch (error) {
-    return Response.json({ message: "error" });
+    return NextResponse.json({ message: "error" });
   }
 };

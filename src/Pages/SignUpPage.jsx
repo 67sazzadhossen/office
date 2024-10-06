@@ -1,5 +1,6 @@
 "use client";
 import LoadingInfinite from "@/Components/Shared/Loading/LoadingInfinite";
+import SocialLogin from "@/Components/Shared/SocialLogin/SocialLogin";
 import MainLayout from "@/Layout/MainLayout";
 import { useAxios } from "@/Services/useAxios";
 import { useState } from "react";
@@ -60,7 +61,7 @@ const SignUpPage = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen bg-black flex justify-center items-center">
+        <div className="min-h-screen bg-black flex justify-center flex-col py-24 text-white items-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className=" w-1/3 border border-gray-800 p-8 rounded-xl backdrop-blur-lg shadow-inner"
@@ -121,6 +122,10 @@ const SignUpPage = () => {
               <button className="btn btn-primary">Sign Up</button>
             </div>
           </form>
+          <div className={"divider divider-neutral w-1/4 mx-auto"}>
+            Or Login With
+          </div>
+          <SocialLogin></SocialLogin>
           <ToastContainer />
         </div>
       )}

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export const middleware = async (request) => {
-  const token = cookies(request).get("next-auth.session-token");
+  const token = cookies(request).get("__Secure-next-auth.session-token");
   const pathname = request.nextUrl.pathname;
 
   if (pathname.includes("api")) {

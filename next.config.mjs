@@ -10,18 +10,6 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback.fs = false; // This helps with certain packages that are node-specific
-    }
-    return config;
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    esmExternals: true,
-  },
 };
 
 export default nextConfig;

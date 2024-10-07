@@ -40,7 +40,7 @@ const Modal = ({
         price: data.price,
       };
 
-      const res = await useAxios.put(`/${apiName}/api`, getData);
+      const res = await useAxios.post(`/${apiName}/api`, getData);
       console.log(res.data);
       if (res.status === 200) {
         reset();

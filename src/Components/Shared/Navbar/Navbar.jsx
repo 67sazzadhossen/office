@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import useLoggedUser from "@/Hooks/useLoggedUser";
@@ -15,16 +15,36 @@ const Navbar = () => {
   const [data, refetch] = useLoadData("navbar");
   // console.log(data.data[0]);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "Portfolio", path: "/portfolio" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
     <div className="">
-      <nav className="flex z-50 justify-between items-center px-40 py-4 bg-black bg-opacity-50 backdrop-blur-2xl fixed text-white w-full">
-        <div className="flex items-center gap-4">
-          <Image
-            src={data?.data[0]?.image}
-            width={60}
-            height={60}
-            alt="logo"
-          ></Image>
+      <nav className="flex z-50 justify-between items-center  py-4 bg-black bg-opacity-50 backdrop-blur-2xl fixed text-white w-full px-4 lg:px-40 text-sm sm:text-base">
+        <div className="flex flex-col lg:flex-row lg:gap-4 items-center">
+          {data && (
+            <Image
+              src={data?.data[0]?.image}
+              width={60}
+              height={60}
+              alt="logo"
+            ></Image>
+          )}
           {isAdmin && (
             // <UpdateNavbarModal
             //   logo={logo}
@@ -42,17 +62,53 @@ const Navbar = () => {
           )}
         </div>
         <div>
-          <ul className="flex items-center gap-16">
-            <Link href={"/"}>Home</Link>
-            <Link href={"/about"}>About</Link>
-            <Link href={"/services"}>Services</Link>
-            <Link href={"/portfolio"}>Portfolio</Link>
-            <Link href={"/contact"}>Contact</Link>
+          <ul className="hidden lg:flex items-center gap-16">
+            {links.map((link, idx) => (
+              <Link key={idx} href={link.path}>
+                {link.name}
+              </Link>
+            ))}
           </ul>
         </div>
         <div className="">
           {authenticated ? (
-            <button onClick={signOut}>Logout</button>
+            <div>
+              <div>
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost rounded-btn"
+                    onClick={toggleDropdown} // Toggling dropdown visibility
+                    onBlur={closeDropdown} // Close the dropdown when clicking outside
+                  >
+                    <Image
+                      className={"rounded-full"}
+                      src={user.image}
+                      width={50}
+                      height={50}
+                      alt={"profile"}
+                    ></Image>
+                  </div>
+                  {isOpen && (
+                    <ul
+                      tabIndex={0}
+                      className="menu dropdown-content text-black bg-base-100 rounded-box z-[1] mt-4 p-4 shadow text-center space-y-2"
+                    >
+                      <p>{user.name}</p>
+                      <p>{user.email}</p>
+
+                      <button
+                        className={"btn btn-error text-white"}
+                        onClick={signOut}
+                      >
+                        Logout
+                      </button>
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
           ) : (
             <div className="flex items-center gap-6">
               <Link href={"/login"}>Login</Link>

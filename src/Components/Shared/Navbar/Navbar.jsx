@@ -6,6 +6,7 @@ import { signOut } from "next-auth/react";
 import useLoggedUser from "@/Hooks/useLoggedUser";
 import useLoadData from "@/Hooks/useLoadData";
 import Modal from "@/Components/Modals/Modal";
+import SideMenu from "./SideMenu/SideMenu";
 
 const Navbar = () => {
   const { user, isAdmin, status } = useLoggedUser();
@@ -38,12 +39,15 @@ const Navbar = () => {
       <nav className="flex z-50 justify-between items-center  py-4 bg-black bg-opacity-50 backdrop-blur-2xl fixed text-white w-full px-4 lg:px-40 text-sm sm:text-base">
         <div className="flex flex-col lg:flex-row lg:gap-4 items-center">
           {data && (
-            <Image
-              src={data?.data[0]?.image}
-              width={60}
-              height={60}
-              alt="logo"
-            ></Image>
+            <div className={"flex gap-2 items-center"}>
+              <SideMenu></SideMenu>
+              <Image
+                src={data?.data[0]?.image}
+                width={60}
+                height={60}
+                alt="logo"
+              ></Image>
+            </div>
           )}
           {isAdmin && (
             // <UpdateNavbarModal
@@ -80,7 +84,7 @@ const Navbar = () => {
                     role="button"
                     className="btn btn-ghost rounded-btn"
                     onClick={toggleDropdown} // Toggling dropdown visibility
-                    onBlur={closeDropdown} // Close the dropdown when clicking outside
+                    // Close the dropdown when clicking outside
                   >
                     <Image
                       className={"rounded-full"}
@@ -92,6 +96,7 @@ const Navbar = () => {
                   </div>
                   {isOpen && (
                     <ul
+                      onBlur={closeDropdown}
                       tabIndex={0}
                       className="menu dropdown-content text-black bg-base-100 rounded-box z-[1] mt-4 p-4 shadow text-center space-y-2"
                     >

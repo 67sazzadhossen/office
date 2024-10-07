@@ -1,7 +1,7 @@
 import { connectDb } from "@/Services/connectDb";
 import { NextResponse } from "next/server";
 
-export const PUT = async(request)=> {
+export const POST = async(request)=> {
     const data = await request.json();
     console.log(data)
     try {

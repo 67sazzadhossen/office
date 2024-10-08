@@ -13,11 +13,11 @@ const SideMenu = ({ links }) => {
     setIsOpen(false);
   };
   return (
-    <div>
+    <div className={"lg:hidden"}>
       <motion.div
         animate={isOpen ? "open" : "closed"}
         tabIndex={0} // Make the div focusable
-        // onBlur={closeDropdown}
+        onBlur={closeDropdown}
         onClick={toggleDropdown}
         className={"relative h-12 w-12 rounded-full z-10"}
       >

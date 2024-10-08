@@ -12,8 +12,8 @@ const MainLayout = ({ children }) => {
       root
       options={{
         // Learn more -> https://github.com/darkroomengineering/lenis?tab=readme-ov-file#instance-settings
-        lerp: 0.05,
-        infinite: true,
+        lerp: 2,
+        // infinite: true,
         syncTouch: true,
       }}
     >

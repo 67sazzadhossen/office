@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className="flex flex-col lg:flex-row lg:gap-4 items-center">
           {data && (
             <div className={"flex gap-2 items-center"}>
-              <SideMenu></SideMenu>
+              <SideMenu links={links}></SideMenu>
               <Image
                 src={data?.data[0]?.image}
                 width={60}
@@ -80,7 +80,7 @@ const Navbar = () => {
               <div>
                 <div className="dropdown dropdown-end">
                   <div
-                    tabIndex={0}
+                    tabIndex={1}
                     role="button"
                     className="btn btn-ghost rounded-btn"
                     onClick={toggleDropdown} // Toggling dropdown visibility
@@ -97,7 +97,6 @@ const Navbar = () => {
                   {isOpen && (
                     <ul
                       onBlur={closeDropdown}
-                      tabIndex={0}
                       className="menu dropdown-content text-black bg-base-100 rounded-box z-[1] mt-4 p-4 shadow text-center space-y-2"
                     >
                       <p>{user.name}</p>

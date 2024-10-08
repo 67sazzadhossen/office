@@ -6,6 +6,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import Image from "next/image";
 
 const OurServices = () => {
   const services = [
@@ -46,10 +47,10 @@ const OurServices = () => {
   ];
 
   const { scrollY } = useScroll();
-  const SECTION_HEIGHT = 4000;
+  const SECTION_HEIGHT = 3600;
 
-  const clip1 = useTransform(scrollY, [0, 4000], [0, 0]);
-  const clip2 = useTransform(scrollY, [0, 4000], [100, 100]);
+  const clip1 = useTransform(scrollY, [0, SECTION_HEIGHT], [0, 0]);
+  const clip2 = useTransform(scrollY, [0, SECTION_HEIGHT], [100, 100]);
 
   const clipPath = useMotionTemplate`polygon(${clip1}% ${clip1}%, ${clip2}% ${clip1}%, ${clip2}% ${clip2}%, ${clip1}% ${clip2}% )`;
 
@@ -60,12 +61,12 @@ const OurServices = () => {
   );
   const opacity = useTransform(
     scrollY,
-    [SECTION_HEIGHT, SECTION_HEIGHT + 500],
+    [SECTION_HEIGHT, SECTION_HEIGHT * 1.3],
     [1, 0]
   );
   const rotate = useTransform(scrollY, [0, SECTION_HEIGHT + 500], [0, 360]);
 
-  const ParallaxImg = ({ className, alt, src, start, end }) => {
+  const ParallaxCard = ({ start, end, children }) => {
     const ref = useRef(null);
 
     const { scrollYProgress } = useScroll({
@@ -80,49 +81,12 @@ const OurServices = () => {
     const transform = useMotionTemplate`translateY(${y}px) scale(${scale})`;
 
     return (
-      <motion.img
-        src={src}
-        alt={alt}
-        className={className}
-        ref={ref}
-        style={{ transform, opacity }}
-      />
+      <motion.div ref={ref} style={{ transform, opacity }}>
+        {children}
+      </motion.div>
     );
   };
   return (
-    // <div className={"bg-black text-white sticky"}>
-    //   <div
-    //     style={{
-    //       backgroundImage: `url("https://images.unsplash.com/photo-1475070929565-c985b496cb9f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D")`,
-    //     }}
-    //     className={" bg-cover bg-no-repeat bg-fixed relative"}
-    //   >
-    //     {services.map((service, idx) => (
-    //       <div
-    //         className={
-    //           " h-screen flex items-center gap-4 justify-between max-w-[85%] mx-auto sticky"
-    //         }
-    //       >
-    //         <div className={"space-y-4"}>
-    //           <h1 className={"text-3xl font-extrabold"}>{service.name}</h1>
-    //           <h1>{service.description}</h1>
-    //           <div>
-    //             {service.offerings.map((offer, idx) => (
-    //               <h1>{offer}</h1>
-    //             ))}
-    //           </div>
-    //         </div>
-    //         <Image
-    //           src={service.image}
-    //           height={600}
-    //           width={800}
-    //           alt={service.name}
-    //         ></Image>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
-
     <div className={"bg-black"}>
       <div
         style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
@@ -140,37 +104,36 @@ const OurServices = () => {
             backgroundRepeat: "no-repeat",
           }}
         ></motion.div>
-        {/* <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-zinc-950/0 to-zinc-950" /> */}
+        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-zinc-950/0 to-black" />
 
-        <div className="mx-auto max-w-5xl px-4 pt-[200px]">
-          <ParallaxImg
-            src="https://images.unsplash.com/photo-1484600899469-230e8d1d59c0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="And example of a space launch"
-            start={200}
-            end={100}
-            className=""
-          />
-          <ParallaxImg
-            src="https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="An example of a space launch"
-            start={400}
-            end={200}
-            className=""
-          />
-          <ParallaxImg
-            src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Orbiting satellite"
-            start={600}
-            end={200}
-            className=""
-          />
-          <ParallaxImg
-            src="https://images.unsplash.com/photo-1494022299300-899b96e49893?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Orbiting satellite"
-            start={800}
-            end={200}
-            className=""
-          />
+        <div className=" flex flex-col">
+          {services.map((service, idx) => (
+            <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
+              <div
+                className={
+                  "h-[80vh] flex justify-between items-center px-14 rounded-3xl backdrop-blur-[1px] text-white bg-black bg-opacity-60 w-2/3 mx-auto"
+                }
+              >
+                <div className={""}>
+                  <h1 className={"font-bold text-3xl"}>{service.name}</h1>
+                  <h1>{service.description}</h1>
+                  <div>
+                    {service.offerings.map((offer, idx) => (
+                      <h1 key={idx}>{offer}</h1>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    width={600}
+                    height={400}
+                  />
+                </div>
+              </div>
+            </ParallaxCard>
+          ))}
         </div>
       </div>
     </div>

@@ -47,13 +47,6 @@ const PortfolioSection = () => {
   return (
     <>
       <div className="min-h-screen bg-black">
-        {/* Vertical content before the horizontal scroll section */}
-        <section className="h-screen flex items-center justify-center bg-green-200">
-          <h1 className="text-3xl font-bold">
-            Vertical Scroll Before Horizontal Section
-          </h1>
-        </section>
-
         {/* Horizontal scrolling section */}
         <section
           ref={containerRef}
@@ -97,13 +90,6 @@ const PortfolioSection = () => {
               View All
             </Link>
           </div>
-        </section>
-
-        {/* Vertical content after the horizontal scroll section */}
-        <section className="h-screen flex items-center justify-center bg-red-200">
-          <h1 className="text-3xl font-bold">
-            Vertical Scroll After Horizontal Section
-          </h1>
         </section>
       </div>
     </>

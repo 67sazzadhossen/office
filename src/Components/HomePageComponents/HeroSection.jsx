@@ -9,11 +9,20 @@ const HeroSection = () => {
   return (
     <div className="min-h-screen relative bg-black">
       <div className=" h-screen lg:max-w-[85%] mx-auto px-4 lg:px-0">
-        <div className="flex h-screen  flex-col justify-center">
+        <div className="flex h-screen flex-col justify-center">
           {/* ======= description ===== */}
-          <h1 className="text-white text-5xl lg:text-8xl w-3/4 z-40  leading-tight font-bold tracking-wide">
-            {data?.data[0].title}
-          </h1>
+          <div className=" w-3/4 lg:w-2/3 z-40 ">
+            <h1
+              className={
+                "text-white text-3xl lg:text-[3rem] leading-tight font-serif tracking-wider"
+              }
+            >
+              {data?.data[0].title}
+            </h1>
+            <div className={"btn btn-outline text-white mt-3"}>
+              Tell us what you have in mind
+            </div>
+          </div>
 
           {isAdmin && (
             <div className={"lg:absolute mt-6 lg:mt-0 bottom-16 z-10"}>
@@ -54,7 +63,7 @@ const HeroSection = () => {
       <div
         style={{ backgroundImage: `url("${data?.data[0].image}}")` }}
         className={
-          "h-screen absolute w-full bg-red-400 top-0 bg-no-repeat bg-cover z-0"
+          "h-screen absolute w-full bg-red-400 top-0 bg-no-repeat bg-cover z-0 lg:hidden"
         }
       >
         <div className="h-screen w-full bg-black opacity-50"></div>

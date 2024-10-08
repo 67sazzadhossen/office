@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Tanstack from "@/Services/Tanstack";
 import AuthProvider from "@/Services/AuthProvider";
-import { Lora } from "next/font/google";
+import { Lora, Manrope } from "next/font/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,7 +15,15 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const lora = Lora({ subsets: ["latin"] });
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "700"], // Specify the font weights you need
+});
 
 export const metadata = {
   title: "My Company",
@@ -25,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${lora.className}  antialiased`}>
+      <body className={`${manrope.className}  antialiased`}>
         <Tanstack>
           <AuthProvider>{children}</AuthProvider>
         </Tanstack>

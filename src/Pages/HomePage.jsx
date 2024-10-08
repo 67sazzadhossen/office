@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <MainLayout>
       <HeroSection></HeroSection>
-      <ServicesSection></ServicesSection>
+      {/* <ServicesSection></ServicesSection> */}
       <PortfolioSection></PortfolioSection>
     </MainLayout>
   );

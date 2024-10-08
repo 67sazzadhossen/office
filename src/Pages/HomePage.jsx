@@ -1,6 +1,6 @@
 "use client";
 import HeroSection from "@/Components/HomePageComponents/HeroSection";
-import OurServices from "@/components/HomePageComponents/OurServices";
+import OurServices from "@/Components/HomePageComponents/OurServices";
 import PortfolioSection from "@/Components/HomePageComponents/PortfolioSection";
 import MainLayout from "@/Layout/MainLayout";
 

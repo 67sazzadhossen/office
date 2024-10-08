@@ -14,13 +14,14 @@ const SideMenu = ({ links }) => {
   };
   return (
     <div>
-      {/* Toggle button */}
       <motion.div
         animate={isOpen ? "open" : "closed"}
         tabIndex={0} // Make the div focusable
+        // onBlur={closeDropdown}
         onClick={toggleDropdown}
         className={"relative h-12 w-12 rounded-full z-10"}
       >
+        {/* Toggle button */}
         <motion.span
           style={{
             left: "50%",
@@ -78,6 +79,53 @@ const SideMenu = ({ links }) => {
           className={"bg-black w-5 h-[3px] absolute rounded-full z-10"}
         ></motion.span>
 
+        {/* Navigation title */}
+        <motion.div
+          variants={{
+            open: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                stiffness: 80,
+              },
+            },
+            closed: {
+              y: -500,
+              opacity: 0,
+              transition: {
+                type: "spring",
+                stiffness: 80,
+              },
+            },
+          }}
+          className={"absolute  z-10 -bottom-8 text-black"}
+        >
+          Navigation
+        </motion.div>
+        <motion.div
+          variants={{
+            open: {
+              x: 0,
+              width: "295px",
+              transition: {
+                delay: 0.6,
+                type: "spring",
+                stiffness: 80,
+              },
+            },
+            closed: {
+              x: -500,
+              width: "0px",
+              transition: {
+                type: "spring",
+                stiffness: 80,
+              },
+            },
+          }}
+          className={"absolute h-[2px] bg-black z-10 -bottom-10 text-black"}
+        ></motion.div>
+
         {/* Toggle Menu */}
         <motion.div
           animate={isOpen ? "open" : "closed"}
@@ -109,25 +157,12 @@ const SideMenu = ({ links }) => {
           <motion.ul
             animate={isOpen ? "open" : "closed"}
             className={
-              "text-black absolute text-center top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%]"
+              "text-black absolute text-center top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] text-3xl space-y-4"
             }
           >
             {links.map((link, idx) => (
               <motion.li
-                // variants={{
-                //   open: {
-                //     y: 0,
-                //     opacity: 1,
-                //     transition: {
-                //       delay: `${idx / 7}`,
-                //     },
-                //   },
-                //   closed: {
-                //     y: -500,
-                //     opacity: 0,
-                //     transition: { delay: `${idx / 10}` },
-                //   },
-                // }}
+                onClick={toggleDropdown}
                 variants={{
                   open: {
                     y: 0,

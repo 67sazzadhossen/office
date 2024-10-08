@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef } from "react";
 import {
   motion,
@@ -55,7 +56,7 @@ const ServicesSection = () => {
   const backgroundSize = useTransform(
     scrollY,
     [0, SECTION_HEIGHT + 500],
-    ["-10%", "150%"]
+    ["0%", "150%"]
   );
   const opacity = useTransform(
     scrollY,

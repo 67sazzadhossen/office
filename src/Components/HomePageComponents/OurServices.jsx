@@ -117,15 +117,15 @@ const OurServices = () => {
         </motion.div>
         <div className="absolute bottom-0 left-0 right-0 h-screen bg-gradient-to-b from-zinc-950/0 to-black" />
 
-        <div className=" flex flex-col gap-10">
+        <div className=" flex flex-col gap-10 px-2 lg:px-0">
           {services.map((service, idx) => (
             <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
               <div
                 className={
-                  "h-[75vh] flex flex-col lg:flex-row justify-between items-center px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 lg:w-2/3 mx-auto shadow-sm shadow-gray-400"
+                  "lg:h-[75vh] gap-6 lg:gap-0 flex flex-col-reverse lg:flex-row lg:justify-between items-center py-6 px-2 lg:px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 lg:w-2/3 mx-auto shadow-sm shadow-gray-400"
                 }
               >
-                <div className={"w-1/3"}>
+                <div className={"lg:w-1/3"}>
                   <h1 className={"font-bold text-3xl"}>{service.name}</h1>
                   <h1>{service.description}</h1>
                   <div>

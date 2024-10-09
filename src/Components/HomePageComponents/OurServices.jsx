@@ -109,7 +109,7 @@ const OurServices = () => {
         >
           <div
             className={
-              "text-white text-[300px] leading-[250px] font-extrabold uppercase text-center font-serif"
+              "text-white text-5xl lg:text-[300px] lg:leading-[250px] font-extrabold uppercase text-center font-serif"
             }
           >
             Our Services

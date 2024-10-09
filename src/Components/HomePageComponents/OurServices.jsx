@@ -47,7 +47,7 @@ const OurServices = () => {
   ];
 
   const { scrollY } = useScroll();
-  const SECTION_HEIGHT = 3600;
+  const SECTION_HEIGHT = 3500;
 
   const clip1 = useTransform(scrollY, [0, SECTION_HEIGHT], [0, 0]);
   const clip2 = useTransform(scrollY, [0, SECTION_HEIGHT], [100, 100]);
@@ -56,15 +56,16 @@ const OurServices = () => {
 
   const backgroundSize = useTransform(
     scrollY,
-    [0, SECTION_HEIGHT + 500],
-    ["0%", "150%"]
+    [1, SECTION_HEIGHT + 500],
+    ["0%", "100%"]
   );
+  const size = useTransform(scrollY, [0, SECTION_HEIGHT + 500], ["0%", "100%"]);
   const opacity = useTransform(
     scrollY,
     [SECTION_HEIGHT, SECTION_HEIGHT * 1.3],
     [1, 0]
   );
-  const rotate = useTransform(scrollY, [0, SECTION_HEIGHT + 500], [0, 360]);
+  // const rotate = useTransform(scrollY, [0, SECTION_HEIGHT + 500], [0, 360]);
 
   const ParallaxCard = ({ start, end, children }) => {
     const ref = useRef(null);
@@ -87,34 +88,44 @@ const OurServices = () => {
     );
   };
   return (
-    <div className={"bg-black"}>
+    <div className={"bg-black "}>
       <div
         style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
         className={"relative w-full"}
       >
         <motion.div
-          className="sticky top-0 h-screen w-full text-8xl text-white"
+          className="sticky top-0 h-screen w-full bg-black flex items-center justify-center bg-cente"
           style={{
             clipPath,
             // rotate,
             backgroundSize,
+            scale: size,
             opacity,
-            backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/American_Broadcasting_Company_Logo.svg/2044px-American_Broadcasting_Company_Logo.svg.png)`,
-            backgroundPosition: "center",
+            // backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/American_Broadcasting_Company_Logo.svg/2044px-American_Broadcasting_Company_Logo.svg.png)`,
+            // backgroundImage: `url(https://animated-gif-creator.com/images/03/animated-logo-gifs-get-the-best-gif-on-giphy_33.gif)`,
+
             backgroundRepeat: "no-repeat",
           }}
-        ></motion.div>
-        <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-zinc-950/0 to-black" />
+        >
+          <div
+            className={
+              "text-white text-[300px] leading-[250px] font-extrabold uppercase text-center font-serif"
+            }
+          >
+            Our Services
+          </div>
+        </motion.div>
+        <div className="absolute bottom-0 left-0 right-0 h-screen bg-gradient-to-b from-zinc-950/0 to-black" />
 
-        <div className=" flex flex-col">
+        <div className=" flex flex-col gap-10">
           {services.map((service, idx) => (
             <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
               <div
                 className={
-                  "h-[80vh] flex justify-between items-center px-14 rounded-3xl backdrop-blur-[1px] text-white bg-black bg-opacity-60 w-2/3 mx-auto"
+                  "h-[75vh] flex justify-between items-center px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 w-2/3 mx-auto shadow-sm shadow-gray-400"
                 }
               >
-                <div className={""}>
+                <div className={"w-1/3"}>
                   <h1 className={"font-bold text-3xl"}>{service.name}</h1>
                   <h1>{service.description}</h1>
                   <div>

@@ -122,7 +122,7 @@ const OurServices = () => {
             <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
               <div
                 className={
-                  "h-[75vh] flex justify-between items-center px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 lg:w-2/3 mx-auto shadow-sm shadow-gray-400"
+                  "h-[75vh] flex flex-col lg:flex-row justify-between items-center px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 lg:w-2/3 mx-auto shadow-sm shadow-gray-400"
                 }
               >
                 <div className={"w-1/3"}>

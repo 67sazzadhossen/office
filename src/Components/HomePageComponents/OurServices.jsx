@@ -109,7 +109,7 @@ const OurServices = () => {
         >
           <div
             className={
-              "text-white text-5xl lg:text-[300px] lg:leading-[250px] font-extrabold uppercase text-center font-serif"
+              "text-white text-7xl lg:text-[300px] lg:leading-[250px] font-extrabold uppercase text-center font-serif"
             }
           >
             Our Services
@@ -122,7 +122,7 @@ const OurServices = () => {
             <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
               <div
                 className={
-                  "h-[75vh] flex justify-between items-center px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 w-2/3 mx-auto shadow-sm shadow-gray-400"
+                  "h-[75vh] flex justify-between items-center px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 lg:w-2/3 mx-auto shadow-sm shadow-gray-400"
                 }
               >
                 <div className={"w-1/3"}>

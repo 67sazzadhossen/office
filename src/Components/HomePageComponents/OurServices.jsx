@@ -119,8 +119,11 @@ const OurServices = () => {
 
         <div className=" flex flex-col gap-10 px-2 lg:px-0 ">
           {services.map((service, idx) => (
-            <div className={"flex justify-center lg:flex-col h-screen p-3"}>
-              <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
+            <div
+              key={idx}
+              className={"flex justify-center lg:flex-col h-screen p-3"}
+            >
+              <ParallaxCard start={80} end={80} className={" w-full"}>
                 <motion.div
                   whileInView={{ opacity: 1, x: 0, repeatDur: 0.5 }} // Animates to full opacity and original Y position
                   initial={{

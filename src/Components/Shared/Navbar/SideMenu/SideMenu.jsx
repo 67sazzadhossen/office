@@ -13,7 +13,7 @@ const SideMenu = ({ links }) => {
     setIsOpen(false);
   };
   return (
-    <div className={"lg:hidden"}>
+    <div className={""}>
       <motion.div
         animate={isOpen ? "open" : "closed"}
         tabIndex={0} // Make the div focusable

@@ -2,27 +2,12 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Tanstack from "@/Services/Tanstack";
 import AuthProvider from "@/Services/AuthProvider";
-import { Lora, Manrope } from "next/font/google";
+import { Raleway } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "700"], // Specify the font weights you need
+const raleway = Raleway({
+  subsets: ["latin"], // Latin subset for better performance
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], // All font weights
+  style: ["normal", "italic"], // Normal and italic styles
 });
 
 export const metadata = {
@@ -33,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${manrope.className}  antialiased`}>
+      <body className={`${raleway.className}  antialiased`}>
         <Tanstack>
           <AuthProvider>{children}</AuthProvider>
         </Tanstack>

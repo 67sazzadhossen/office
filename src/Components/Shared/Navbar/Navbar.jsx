@@ -6,8 +6,6 @@ import { signOut } from "next-auth/react";
 import useLoggedUser from "@/Hooks/useLoggedUser";
 import useLoadData from "@/Hooks/useLoadData";
 import Modal from "@/Components/Modals/Modal";
-import SideMenu from "./SideMenu/SideMenu";
-import ToggleButton from "../ToggleButton/ToggleButton";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
@@ -114,7 +112,7 @@ const Navbar = () => {
 
       <motion.nav
         className={
-          "fixed  flex justify-between items-center px-2 lg:px-10 py-3 w-full lg:w-[90%] left-[50%] -translate-x-[50%]  z-50  text-black"
+          "fixed  flex justify-between items-center px-2 lg:px-10 py-3 w-full lg:max-w-[90%] left-[50%] -translate-x-[50%]  z-50  text-black"
         }
       >
         <motion.div
@@ -152,7 +150,7 @@ const Navbar = () => {
                 animate={isOpen ? "open" : "closed"}
                 variants={{
                   open: {
-                    x: 0,
+                    y: 0,
                     opacity: 1,
                     pointerEvents: "auto", // Enable clicking when open
                     transition: {
@@ -162,7 +160,7 @@ const Navbar = () => {
                     },
                   },
                   closed: {
-                    x: 100,
+                    y: 100,
                     opacity: 0,
                     pointerEvents: "none", // Disable clicking when closed
                     transition: {

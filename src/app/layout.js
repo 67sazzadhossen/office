@@ -3,6 +3,7 @@ import "./globals.css";
 import Tanstack from "@/Services/Tanstack";
 import AuthProvider from "@/Services/AuthProvider";
 import { Raleway } from "next/font/google";
+import Script from "next/script";
 
 const raleway = Raleway({
   subsets: ["latin"], // Latin subset for better performance
@@ -18,6 +19,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Script
+        src="
+https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js
+"
+      ></Script>
       <body className={`${raleway.className}  antialiased`}>
         <Tanstack>
           <AuthProvider>{children}</AuthProvider>

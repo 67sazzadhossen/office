@@ -38,7 +38,7 @@ const OurServices = () => {
         "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/312882501/original/8cd21693c6c119052412840b9ecc3a2e3510e730/do-web-uiux-design-in-figma.png",
       name: "UI/UX Design",
       description:
-        "User-centric design approach to create visually appealing and highly functional interfaces.",
+        "User-centric design approach to create visually appealing and highly functional interfaces. User-centric design approach to create visually appealing and highly functional interfaces. ",
       offerings: [
         "Designing intuitive and engaging user experiences",
         "Enhancing product usability and customer satisfaction",
@@ -117,33 +117,57 @@ const OurServices = () => {
         </motion.div>
         <div className="absolute bottom-0 left-0 right-0 h-screen bg-gradient-to-b from-zinc-950/0 to-black" />
 
-        <div className=" flex flex-col gap-10 px-2 lg:px-0">
+        <div className=" flex flex-col gap-10 px-2 lg:px-0 ">
           {services.map((service, idx) => (
-            <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
-              <div
-                className={
-                  "lg:h-[75vh] gap-6 lg:gap-0 flex flex-col-reverse lg:flex-row lg:justify-between items-center py-6 px-2 lg:px-14 rounded-3xl bg-slate-900 text-white bgg bg-opacity-90 lg:w-2/3 mx-auto shadow-sm shadow-gray-400"
-                }
-              >
-                <div className={"lg:w-1/3"}>
-                  <h1 className={"font-bold text-3xl"}>{service.name}</h1>
-                  <h1>{service.description}</h1>
-                  <div>
-                    {service.offerings.map((offer, idx) => (
-                      <h1 key={idx}>{offer}</h1>
-                    ))}
+            <div className={"flex justify-center lg:flex-col h-screen p-3"}>
+              <ParallaxCard key={idx} start={80} end={80} className={" w-full"}>
+                <motion.div
+                  whileInView={{ opacity: 1, x: 0, repeatDur: 0.5 }} // Animates to full opacity and original Y position
+                  initial={{
+                    opacity: 0,
+                    x: idx % 2 === 0 ? -100 : 100,
+                  }} // Starts with hidden state and off-screen
+                  transition={{
+                    duration: 0.5,
+                  }} // Controls the speed of the animation
+                  viewport={{ amount: 0.5 }}
+                  className={
+                    "flex flex-col-reverse lg:flex-row items-center justify-center lg:w-[70%]  lg:mx-auto  h-[60vh] bg-gray-700 bg-opacity-70 p-6 text-white rounded-lg gap-4 relative"
+                  }
+                >
+                  <div className={"lg:w-1/2"}>
+                    <h1 className={"font-bold text-3xl"}>{service.name}</h1>
+                    <h1>{service.description}</h1>
+                    <div>
+                      {service.offerings.map((offer, idx) => (
+                        <h1 key={idx}>{offer}</h1>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <Image
-                    src={service.image}
-                    alt={service.name}
-                    width={600}
-                    height={400}
-                  />
-                </div>
-              </div>
-            </ParallaxCard>
+                  <motion.div
+                    initial={{ scale: 0.7 }}
+                    whileInView={{
+                      scale: 1.2,
+                      repeatDur: 0.5,
+                      transition: {
+                        duration: 0.5,
+                      },
+                    }}
+                    className={"lg:w-1/2"}
+                  >
+                    <Image
+                      className={
+                        "rounded-2xl lg:absolute lg:-right-[2%] lg:top-[50%] lg:-translate-y-[50%] shadow-lg shadow-zinc-600"
+                      }
+                      src={service.image}
+                      alt={service.name}
+                      width={600}
+                      height={400}
+                    />
+                  </motion.div>
+                </motion.div>
+              </ParallaxCard>
+            </div>
           ))}
         </div>
       </div>

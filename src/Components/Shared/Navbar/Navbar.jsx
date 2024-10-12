@@ -46,7 +46,7 @@ const Navbar = () => {
           duration: 0.3,
         },
       }}
-      className=""
+      className="fixed w-full z-[9999]"
     >
       {/* <nav className="">
         <div className=" flex justify-between">

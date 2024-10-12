@@ -3,57 +3,42 @@ import useLoggedUser from "@/Hooks/useLoggedUser";
 import useLoadData from "@/Hooks/useLoadData";
 import Modal from "../Modals/Modal";
 import Image from "next/image";
-import bg from "../../../Public/assets/Ripple.svg";
-
-import React, { useEffect, useRef, useState } from "react";
-// import * as THREE from "three";
-// import CLOUDS from "vanta/dist/vanta.globe.min.js";
-// Make sure window.THREE is defined, e.g. by including three.min.js in the document head using a <script> tag
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
-  // const [vantaEffect, setVantaEffect] = useState(null);
-  // const myRef = useRef(null);
-  // useEffect(() => {
-  //   if (!vantaEffect) {
-  //     setVantaEffect(
-  //       CLOUDS({
-  //         el: myRef.current,
-  //         THREE,
-  //         mouseControls: true,
-  //         touchControls: true,
-  //         gyroControls: false,
-  //         minHeight: 200.0,
-  //         minWidth: 200.0,
-  //         scale: 1.0,
-  //         scaleMobile: 1.0,
-  //         color: 0x66595e,
-  //         color2: 0x756363,
-  //         size: 1.2,
-  //         backgroundColor: 0xcfcbd7,
-  //       })
-  //     );
-  //   }
-  //   return () => {
-  //     if (vantaEffect) vantaEffect.destroy();
-  //   };
-  // }, [vantaEffect]);
-
   const { isAdmin } = useLoggedUser();
   const [data, refetch] = useLoadData("banner");
   console.log(data?.data[0]);
   return (
     <div
-      // ref={myRef}
-      style={{
-        backgroundImage: 'url("/assets/Ripple.svg")',
-      }}
       className={
-        "min-h-screen flex justify-center items-center bg-no-repeat bg-cover"
+        "min-h-screen flex justify-center items-center bg-no-repeat bg-cover bg-[url('')] bg-opacity-50 relative overflow-x-hidden"
       }
     >
+      <motion.div
+        initial={{ opacity: 0.2, rotate: 0 }}
+        animate={{
+          opacity: 1,
+          scaleX: 1.6,
+          scaleY: 1.3,
+          rotate: "5deg",
+          transition: {
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "mirror",
+          },
+        }}
+        className={"absolute z-0 h-[300px] md:h-[600px] w-full "}
+      >
+        <Image
+          src={"https://i.ibb.co/Y23YNzX/Ripple.png"}
+          layout={"fill"}
+          alt={"background"}
+        ></Image>
+      </motion.div>
       <div
         className={
-          "flex flex-col-reverse lg:flex-row items-center lg:gap-24 lg:max-w-[80%] lg:mx-auto px-3 lg:px-0"
+          "flex flex-col-reverse lg:flex-row items-center lg:gap-24 lg:max-w-[80%] lg:mx-auto px-3 lg:px-0 z-10"
         }
       >
         <div className={"w-full lg:w-2/3 space-y-4"}>

@@ -8,24 +8,28 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   const { isAdmin } = useLoggedUser();
   const [data, refetch] = useLoadData("banner");
-  console.log(data?.data[0]);
+  // console.log(data?.data[0]);
   return (
     <div
       className={
-        "min-h-screen flex justify-center items-center bg-no-repeat bg-cover bg-[url('')] bg-opacity-50 relative overflow-x-hidden"
+        "min-h-screen flex justify-center items-center bg-no-repeat bg-cover bg-[url('')] bg-opacity-50 relative overflow-hidden"
       }
     >
       <motion.div
-        initial={{ opacity: 0.2, rotate: 0 }}
+        initial={{ opacity: 0.2, rotateX: "45deg" }}
         animate={{
           opacity: 1,
           scaleX: 1.6,
           scaleY: 1.3,
-          rotate: "5deg",
+
+          rotateX: "-45deg",
+
           transition: {
-            duration: 3,
+            type: "tween",
+            stiffness: 180,
+            duration: 10,
             repeat: Infinity,
-            repeatType: "mirror",
+            repeatType: "reverse",
           },
         }}
         className={"absolute z-0 h-[300px] md:h-[600px] w-full "}
@@ -36,6 +40,7 @@ const HeroSection = () => {
           alt={"background"}
         ></Image>
       </motion.div>
+
       <div
         className={
           "flex flex-col-reverse lg:flex-row items-center lg:gap-24 lg:max-w-[80%] lg:mx-auto px-3 lg:px-0 z-10"

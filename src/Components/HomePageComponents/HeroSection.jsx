@@ -12,7 +12,7 @@ const HeroSection = () => {
   return (
     <div
       className={
-        "min-h-screen flex justify-center items-center bg-no-repeat bg-cover bg-[url('')] bg-opacity-50 relative overflow-hidden"
+        "min-h-screen flex justify-center items-center bg-no-repeat bg-cover bg-opacity-50 relative overflow-hidden"
       }
     >
       <motion.div
@@ -41,18 +41,29 @@ const HeroSection = () => {
         ></Image>
       </motion.div>
 
-      <div
+      <motion.div
         className={
           "flex flex-col-reverse lg:flex-row items-center lg:gap-24 lg:max-w-[80%] lg:mx-auto px-3 lg:px-0 z-10"
         }
       >
-        <div className={"w-full lg:w-2/3 space-y-4"}>
+        <motion.div
+          initial={{ opacity: 0, x: -100, repeatDur: 0.5 }} // Initial state (invisible and off-screen)
+          whileInView={{ opacity: 1, x: 0 }} // Becomes visible when in view
+          exit={{ opacity: 0, x: -100 }} // Disappears when out of view
+          transition={{
+            duration: 1,
+            type: "spring",
+            stiffness: 80,
+          }} // Smooth easing transition
+          viewport={{ once: false, amount: 0.1 }} // Controls the visibility threshold
+          className={"w-full lg:w-2/3 space-y-6"}
+        >
           <h1 className={"lg:text-5xl text-2xl font-bold leading-snug"}>
-            {data?.data[0].title}
+            {data?.data[0].title || ""}
           </h1>
           <button className={"btn btn-outline"}>Start a project with us</button>
           {isAdmin && (
-            <div className={"lg:absolute mt-6 lg:mt-0 bottom-16 z-10"}>
+            <div className={"mt-6 bottom-16 z-10"}>
               <Modal
                 apiName="banner"
                 buttonName={"Update Banner"}
@@ -65,8 +76,19 @@ const HeroSection = () => {
               ></Modal>
             </div>
           )}
-        </div>
-        <div className={"lg:w-2/3 "}>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 100, repeatDur: 0.5 }} // Initial state (invisible and off-screen)
+          whileInView={{ opacity: 1, x: 0 }} // Becomes visible when in view
+          exit={{ opacity: 0, x: "100vh" }} // Disappears when out of view
+          transition={{
+            duration: 1,
+            type: "spring",
+            stiffness: 80,
+          }} // Smooth easing transition
+          viewport={{ once: false, amount: 0.1 }} // Controls the visibility threshold
+          className={"lg:w-2/3 "}
+        >
           <Image
             className={"rounded-3xl "}
             src={
@@ -76,8 +98,8 @@ const HeroSection = () => {
             width={1200}
             height={600}
           ></Image>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

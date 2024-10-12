@@ -6,7 +6,8 @@ import { signOut } from "next-auth/react";
 import useLoggedUser from "@/Hooks/useLoggedUser";
 import useLoadData from "@/Hooks/useLoadData";
 import Modal from "@/Components/Modals/Modal";
-import { motion } from "framer-motion";
+import { animate, motion } from "framer-motion";
+import { IoMdLogIn } from "react-icons/io";
 
 const Navbar = () => {
   const { user, isAdmin, status } = useLoggedUser();
@@ -17,6 +18,7 @@ const Navbar = () => {
   // console.log(data.data[0]);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -34,7 +36,18 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="">
+    <motion.div
+      initial={{
+        y: -100,
+      }}
+      animate={{
+        y: 0,
+        transition: {
+          duration: 0.3,
+        },
+      }}
+      className=""
+    >
       {/* <nav className="">
         <div className=" flex justify-between">
           {data && (
@@ -142,11 +155,12 @@ const Navbar = () => {
         >
           <motion.ul
             className={
-              "h-full w-full flex justify-center items-center flex-col gap-12 text-xl lg:text-3xl"
+              "h-full w-full flex justify-center items-center flex-col gap-12 text-xl lg:text-3xl absolute"
             }
           >
             {links.map((link, idx) => (
               <motion.li
+                initial={{ opacity: 0 }}
                 animate={isOpen ? "open" : "closed"}
                 variants={{
                   open: {
@@ -160,7 +174,7 @@ const Navbar = () => {
                     },
                   },
                   closed: {
-                    y: 100,
+                    y: "40vh",
                     opacity: 0,
                     pointerEvents: "none", // Disable clicking when closed
                     transition: {
@@ -177,12 +191,85 @@ const Navbar = () => {
             ))}
           </motion.ul>
         </motion.div>
-        <div className={"text-xl lg:text-3xl font-bold uppercase z-50"}>
+        <div
+          className={
+            "text-xl lg:text-3xl font-extrabold tracking-tighter uppercase z-50"
+          }
+        >
           Web Innovators
         </div>
 
         {/* =========== Toggle Button ======= */}
-        <div className={"z-50"}>
+        <div className={"z-50 flex items-center gap-4"}>
+          <div
+            onBlur={() => setClicked(false)}
+            tabIndex={0}
+            className="relative"
+          >
+            {authenticated ? (
+              <motion.div className={"relative "}>
+                <motion.div
+                  onClick={() => setClicked(!clicked)}
+                  className="mask mask-squircle w-8 "
+                >
+                  <Image
+                    className={""}
+                    src={user.image}
+                    width={50}
+                    height={50}
+                    alt={"profile"}
+                  />
+                </motion.div>
+                <motion.div
+                  animate={clicked ? "open" : "closed"}
+                  initial={"closed"}
+                  variants={{
+                    open: {
+                      opacity: 1,
+                      y: 0,
+                      x: 50,
+                      transition: {
+                        type: "spring",
+                        stiffness: 50,
+                        duration: 0.1,
+                      },
+                    },
+                    closed: {
+                      y: "100vh",
+                      opacity: 0,
+                      x: 50,
+                      transition: {
+                        type: "spring",
+                        stiffness: 50,
+                        duration: 0.1,
+                      },
+                    },
+                  }}
+                  className={
+                    " shadow-md text-black bg-white bg-opacity-60 absolute right-[50%] translate-x-[50%] top-[150%] p-6 rounded-xl space-y-2 text-center"
+                  }
+                >
+                  <h1>{user.name}</h1>
+                  <h1>{user.email}</h1>
+                  <button className={"btn btn-sm w-full"} onClick={signOut}>
+                    Log Out
+                  </button>
+                </motion.div>
+              </motion.div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Link href={"/login"} className={"flex gap-2 items-center "}>
+                  {/* <IoMdLogIn></IoMdLogIn> */}
+                  <button className={"btn btn-xs rounded-full"}>Login</button>
+                </Link>
+                <Link href={"/sign-up"} className={"flex gap-2 items-center"}>
+                  {/* <IoMdLogIn></IoMdLogIn> */}
+                  <button className={"btn btn-xs rounded-full"}>Sign Up</button>
+                </Link>
+              </div>
+            )}
+          </div>
+
           <motion.div
             tabIndex={0} // Make the div focusable
             onBlur={closeDropdown}
@@ -232,7 +319,7 @@ const Navbar = () => {
           </motion.div>
         </div>
       </motion.nav>
-    </div>
+    </motion.div>
   );
 };
 

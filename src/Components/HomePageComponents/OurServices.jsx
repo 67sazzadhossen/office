@@ -48,13 +48,11 @@ const OurServices = () => {
     offset: ["start start", "end end"],
   });
 
-  // Compute transformations outside of the return statement
-  const transformations = services.map((service, idx) => {
+  // Pre-calculate transformations for each service card
+  const scales = services.map((_, idx) => {
     const targetScale = 1 - (services.length - idx) * 0.05;
     const range = [idx * 0.25, 1];
-    const scale = useTransform(scrollYProgress, range, [1, targetScale]);
-
-    return { scale };
+    return useTransform(scrollYProgress, range, [1, targetScale]);
   });
 
   return (
@@ -75,7 +73,7 @@ const OurServices = () => {
               viewport={{ once: true }}
               style={{
                 top: `calc(25% + ${idx * 30}px)`,
-                scale: transformations[idx].scale,
+                scale: scales[idx], // Using pre-calculated scale transformation
               }}
               className="w-full p-6 bg-slate-50 lg:p-10 flex flex-col lg:flex-row-reverse gap-16 items-center shadow-lg rounded-2xl h-[500px] absolute border border-gray-200"
             >

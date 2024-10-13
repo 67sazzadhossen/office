@@ -51,10 +51,13 @@ const OurServices = () => {
 
   return (
     <div className={""}>
-      <div className={"sticky top-28 h-[30vh]"}>
+      <div className={"sticky top-20 lg:top-28 h-[30vh]"}>
         <Heading heading={"Our Services"}></Heading>
       </div>
-      <div ref={container} className={"max-w-[90%] mx-auto space-y-16 my-12 "}>
+      <div
+        ref={container}
+        className={"lg:max-w-[90%] lg:mx-auto space-y-16 px-4 lg:px-0"}
+      >
         {services.map((service, idx) => {
           const targetScale = 1 - (services.length - idx) * 0.05;
           const range = [idx * 0.25, 1];

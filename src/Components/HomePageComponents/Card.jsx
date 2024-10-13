@@ -7,7 +7,9 @@ const Card = ({ service, idx, progress, targetScale, range }) => {
   return (
     <div
       key={idx}
-      className={"h-screen sticky top-0 flex items-center justify-center z-10"}
+      className={
+        "h-screen sticky -top-16 lg:top-0 flex items-center justify-center z-10"
+      }
     >
       <motion.div
         initial={{ x: -50, opacity: 0 }}
@@ -16,7 +18,7 @@ const Card = ({ service, idx, progress, targetScale, range }) => {
           top: `calc(25% + ${idx * 30}px)`,
           scale,
         }}
-        className={`w-full p-6 bg-slate-50 lg:p-10 flex flex-col lg:flex-row-reverse gap-16 items-center shadow-lg rounded-2xl h-[500px] absolute border border-gray-200 scale-[80%]`}
+        className={`w-full p-6 bg-slate-50 lg:p-10 flex flex-col lg:flex-row-reverse gap-16 items-center shadow-lg rounded-2xl lg:h-[500px] absolute border border-gray-200 `}
       >
         <Image
           className={"rounded-2xl"}

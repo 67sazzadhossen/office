@@ -49,12 +49,12 @@ const OurServices = () => {
     offset: ["start start", "end end"],
   });
   const scale = useTransform(scrollYProgress, [0, 1], ["80%", "130%"]);
-  const translateX = useTransform(scrollYProgress, [0.9, 1], ["0%", "100%"]);
-  const opacity = useTransform(scrollYProgress, [0.999, 1], [1, 0]);
+  const translateX = useTransform(scrollYProgress, [0.9, 1], ["0", "50px"]);
+  const opacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
 
   return (
-    <div className={""}>
-      <motion.div className={"sticky top-20 lg:top-28 text-center  "}>
+    <div className={"relative"}>
+      <motion.div className={"sticky top-20 lg:top-28 text-center"}>
         <motion.div
           style={{
             translateX,
@@ -65,7 +65,7 @@ const OurServices = () => {
             stiffness: 120,
             duration: 1,
           }}
-          className={" inline-block "}
+          className={"inline-block"}
         >
           <Heading heading={"Our Services"}></Heading>
         </motion.div>

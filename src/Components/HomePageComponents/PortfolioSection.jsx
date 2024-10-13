@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import useLoadData from "@/Hooks/useLoadData";
+import Heading from "../Shared/Heading/Heading";
 
 const PortfolioSection = () => {
   const cards = [0, 1, 2];
@@ -41,11 +42,12 @@ const PortfolioSection = () => {
 
   return (
     <>
-      <div className="min-h-screen text-black">
+      {/* for deskstop */}
+      <div className="lg:min-h-screen text-black">
         {/* Horizontal scrolling section */}
         <section
           ref={containerRef}
-          className="relative overflow-hidden h-screen "
+          className="relative overflow-hidden h-screen hidden lg:block"
         >
           <div
             ref={horizontalRef}
@@ -89,12 +91,51 @@ const PortfolioSection = () => {
 
             <Link
               href={"/portfolio"}
-              className="w-svw card card-compact h-[50%] shadow-xl flex justify-center items-center text-6xl font-extrabold"
+              className="w-svw card card-compact h-[50%] shadow-xl flex justify-center items-center text-6xl font-extrabold bg-gray-100"
             >
               View All
             </Link>
           </div>
         </section>
+      </div>
+
+      {/* for mobile */}
+
+      <div className={"text-center my-12"}>
+        <Heading heading={"Portfolio"}></Heading>
+      </div>
+
+      <div className={"lg:hidden flex flex-col gap-16 px-5"}>
+        {projects?.map((project, index) => (
+          <div
+            key={index}
+            className=" card card-compact shadow-xl flex  bg-base-200  text-2xl relative"
+          >
+            <figure className={"overflow-hidden"}>
+              <Image src={project.url} alt="Shoes" width={1400} height={600} />
+            </figure>
+            <div className="card-body text-black text-start ">
+              <h2 className="card-title text-start">{project.name}</h2>
+              <p>{project.description}</p>
+              <ul className={"flex flex-col md:flex-row gap-3"}>
+                Technologies :{" "}
+                {project.technologies.map((tech, idx) => (
+                  <li className={"list-disc ml-3"} key={idx}>
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+
+              <button className="btn btn-xs btn-outline md:absolute right-4 bottom-4">
+                View details
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <Link href={"/portfolio"} className="btn w-1/2 mx-auto">
+          View All
+        </Link>
       </div>
     </>
   );

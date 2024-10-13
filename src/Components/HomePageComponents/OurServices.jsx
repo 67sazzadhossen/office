@@ -53,7 +53,7 @@ const OurServices = () => {
   const opacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
 
   return (
-    <div className={"relative"}>
+    <div className={"relative py-16 lg:py-0"}>
       <motion.div className={"sticky top-20 lg:top-28 text-center"}>
         <motion.div
           style={{

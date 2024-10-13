@@ -60,7 +60,7 @@ const PortfolioSection = () => {
             {projects?.map((project, index) => (
               <div
                 key={index}
-                className="w-[50%] card card-compact h-[50%] shadow-xl flex  bg-base-200  text-2xl relative"
+                className="w-[50%] card card-compact h-[60%] shadow-xl flex  bg-base-200  text-2xl relative"
               >
                 <figure className={"h-3/4 overflow-hidden"}>
                   <Image
@@ -91,7 +91,7 @@ const PortfolioSection = () => {
 
             <Link
               href={"/portfolio"}
-              className="w-svw card card-compact h-[50%] shadow-xl flex justify-center items-center text-6xl font-extrabold bg-gray-100"
+              className="w-svw card card-compact h-[60%] shadow-xl flex justify-center items-center text-6xl font-extrabold bg-gray-100"
             >
               View All
             </Link>

@@ -101,7 +101,7 @@ const PortfolioSection = () => {
 
       {/* for mobile */}
 
-      <div className={"text-center my-12"}>
+      <div className={"text-center my-12 lg:hidden"}>
         <Heading heading={"Portfolio"}></Heading>
       </div>
 

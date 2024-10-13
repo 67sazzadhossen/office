@@ -42,20 +42,6 @@ const OurServices = () => {
     },
   ];
 
-  // Animation variants for service cards
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.3, // Delay for each card
-        type: "spring",
-        stiffness: 80,
-      },
-    }),
-  };
-
   const container = useRef(null);
   const cardRef = useRef(null);
   const { scrollYProgress } = useScroll({

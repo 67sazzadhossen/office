@@ -1,28 +1,23 @@
 "use client";
-
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
+import useLoadData from "@/Hooks/useLoadData";
 
 const PortfolioSection = () => {
   const cards = [0, 1, 2];
+  const [data] = useLoadData("portfolio");
+  const projects = data?.data.slice(0, 3);
   const containerRef = useRef(null);
   const horizontalRef = useRef(null);
 
   useEffect(() => {
-    // Register GSAP ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
     const horizontalElement = horizontalRef.current;
     const scrollLength = horizontalElement.scrollWidth - window.innerWidth; // Calculate the scrollable width
-    // Calculate the scrollable width
-    // const scrollLength =
-    //   horizontalRef.current.children[0].offsetWidth * cards.length -
-    //   window.innerWidth; // Calculate the scrollable width
-    // console.log(scrollLength);
 
-    // Create the horizontal scrolling animation
     const horizontalScroll = gsap.to(horizontalElement, {
       x: -scrollLength, // Scroll the content to the left
       ease: "none",
@@ -46,7 +41,7 @@ const PortfolioSection = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen text-black">
         {/* Horizontal scrolling section */}
         <section
           ref={containerRef}
@@ -58,24 +53,32 @@ const PortfolioSection = () => {
             style={{ width: "200vw" }} // Make the content wide enough to scroll horizontally
           >
             {/* Horizontal scroll content */}
-            <div className={"text-6xl px-36 text-white"}>Portfolio</div>
+            <div className={"text-6xl px-36 font-bold"}>Portfolio</div>
 
-            {cards.map((card, index) => (
+            {projects?.map((project, index) => (
               <div
                 key={index}
-                className="w-[50%] card card-compact h-[75%] shadow-xl flex justify-center items-center bg-base-200  text-white text-2xl"
+                className="w-[50%] card card-compact h-[75%] shadow-xl flex  bg-base-200  text-2xl"
               >
-                <figure>
+                <figure className={"h-2/3 overflow-hidden"}>
                   <Image
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    src={project.url}
                     alt="Shoes"
-                    width={400}
-                    height={400}
+                    width={1400}
+                    height={600}
                   />
                 </figure>
-                <div className="card-body">
-                  <h2 className="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-body text-black text-start">
+                  <h2 className="card-title text-start">{project.name}</h2>
+                  <p>{project.description}</p>
+                  <ul className={"flex gap-3"}>
+                    Technologies :{" "}
+                    {project.technologies.map((tech, idx) => (
+                      <li className={"list-disc ml-3"} key={idx}>
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
                   <div className="card-actions justify-end">
                     <button className="btn btn-primary">Buy Now</button>
                   </div>
@@ -85,7 +88,7 @@ const PortfolioSection = () => {
 
             <Link
               href={"/portfolio"}
-              className="w-svw card card-compact h-[75%] shadow-xl flex justify-center items-center text-white text-6xl font-extrabold"
+              className="w-svw card card-compact h-[75%] shadow-xl flex justify-center items-center text-6xl font-extrabold"
             >
               View All
             </Link>

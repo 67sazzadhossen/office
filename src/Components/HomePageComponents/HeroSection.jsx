@@ -92,7 +92,8 @@ const HeroSection = () => {
           <Image
             className={"rounded-3xl "}
             src={
-              "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/335c79145455835.629ef2634f695.png"
+              data?.data[0].image ||
+              "http://localhost:3000/_next/image?url=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Fmax_1200%2F335c79145455835.629ef2634f695.png&w=1200&q=75"
             }
             alt={"Hero Image"}
             width={1200}

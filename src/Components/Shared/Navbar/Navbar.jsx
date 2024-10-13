@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import useLoggedUser from "@/Hooks/useLoggedUser";
@@ -11,7 +11,7 @@ import { IoMdLogIn } from "react-icons/io";
 
 const Navbar = () => {
   const { user, isAdmin, status } = useLoggedUser();
-  console.log(user, isAdmin, status);
+  // console.log(user, isAdmin, status);
 
   const authenticated = status === "authenticated";
   const [data, refetch] = useLoadData("navbar");
@@ -24,9 +24,20 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const closeDropdown = () => {
-    setIsOpen(false);
+  const dropdownRef = useRef(null);
+
+  const closeDropdown = (e) => {
+    // Close the dropdown only if clicking outside of it
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setClicked(false);
+    }
   };
+  useEffect(() => {
+    document.addEventListener("mousedown", closeDropdown);
+    return () => {
+      document.removeEventListener("mousedown", closeDropdown);
+    };
+  }, []);
   const links = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -125,7 +136,7 @@ const Navbar = () => {
 
       <motion.nav
         className={
-          "fixed  flex justify-between items-center px-2 lg:px-10 py-3 w-full lg:max-w-[90%] left-[50%] -translate-x-[50%]  z-50  text-black"
+          "fixed flex justify-between items-center px-2 lg:px-10 py-3 w-full  z-50  text-black"
         }
       >
         <motion.div
@@ -150,7 +161,7 @@ const Navbar = () => {
           animate={isOpen ? "open" : "closed"}
           style={{ transformOrigin: "bottom" }} // Apply transformOrigin directly as a style
           className={
-            "absolute bg-white  w-full left-0 z-40 bg-opacity-50 backdrop-blur-xl rounded-b-2xl lg:rounded-3xl"
+            "absolute  bg-slate-100 w-full left-0 z-40 bg-opacity-40 backdrop-blur-xl rounded-b-2xl "
           }
         >
           <motion.ul
@@ -191,21 +202,18 @@ const Navbar = () => {
             ))}
           </motion.ul>
         </motion.div>
-        <div
+        <Link
+          href={"/"}
           className={
             "text-xl lg:text-3xl font-extrabold tracking-tighter uppercase z-50"
           }
         >
           Web Innovators
-        </div>
+        </Link>
 
         {/* =========== Toggle Button ======= */}
         <div className={"z-50 flex items-center gap-4"}>
-          <div
-            onBlur={() => setClicked(false)}
-            tabIndex={0}
-            className="relative"
-          >
+          <div className="relative" ref={dropdownRef}>
             {authenticated ? (
               <motion.div className={"relative "}>
                 <motion.div
@@ -251,7 +259,12 @@ const Navbar = () => {
                 >
                   <h1>{user.name}</h1>
                   <h1>{user.email}</h1>
-                  <button className={"btn btn-sm w-full"} onClick={signOut}>
+                  <button
+                    className={"btn btn-sm w-full"}
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
                     Log Out
                   </button>
                 </motion.div>

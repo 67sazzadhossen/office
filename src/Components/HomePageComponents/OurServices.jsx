@@ -1,12 +1,8 @@
 "use client";
-import React, { useRef } from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import Heading from "../Shared/Heading/Heading";
 
 const OurServices = () => {
   const services = [
@@ -46,136 +42,87 @@ const OurServices = () => {
     },
   ];
 
-  const { scrollY } = useScroll();
-  const SECTION_HEIGHT = 3500;
-
-  const clip1 = useTransform(scrollY, [0, SECTION_HEIGHT], [0, 0]);
-  const clip2 = useTransform(scrollY, [0, SECTION_HEIGHT], [100, 100]);
-
-  const clipPath = useMotionTemplate`polygon(${clip1}% ${clip1}%, ${clip2}% ${clip1}%, ${clip2}% ${clip2}%, ${clip1}% ${clip2}% )`;
-
-  const backgroundSize = useTransform(
-    scrollY,
-    [1, SECTION_HEIGHT + 500],
-    ["0%", "100%"]
-  );
-  const size = useTransform(scrollY, [0, SECTION_HEIGHT + 500], ["0%", "100%"]);
-  const opacity = useTransform(
-    scrollY,
-    [SECTION_HEIGHT, SECTION_HEIGHT * 1.3],
-    [1, 0]
-  );
-  // const rotate = useTransform(scrollY, [0, SECTION_HEIGHT + 500], [0, 360]);
-
-  const ParallaxCard = ({ start, end, children }) => {
-    const ref = useRef(null);
-
-    const { scrollYProgress } = useScroll({
-      target: ref,
-      offset: [`${start}px end`, `end ${end * -1}px`],
-    });
-
-    const opacity = useTransform(scrollYProgress, [0.75, 1], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0.75, 1], [1, 0.85]);
-
-    const y = useTransform(scrollYProgress, [0, 1], [start, end]);
-    const transform = useMotionTemplate`translateY(${y}px) scale(${scale})`;
-
-    return (
-      <motion.div ref={ref} style={{ transform, opacity }}>
-        {children}
-      </motion.div>
-    );
+  // Animation variants for service cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.3, // Delay for each card
+        type: "spring",
+        stiffness: 80,
+      },
+    }),
   };
+
+  const container = useRef(null);
+  const cardRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
+  useEffect(() => {
+    scrollYProgress.on("change", (e) => console.log(scrollYProgress.current));
+  }, []);
+
   return (
-    // <div className={"bg-black "}>
-    //   <div
-    //     style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
-    //     className={"relative w-full"}
-    //   >
-    //     <motion.div
-    //       className="sticky top-0 h-screen w-full bg-black flex items-center justify-center bg-cente"
-    //       style={{
-    //         clipPath,
-    //         // rotate,
-    //         backgroundSize,
-    //         scale: size,
-    //         opacity,
-    //         // backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/American_Broadcasting_Company_Logo.svg/2044px-American_Broadcasting_Company_Logo.svg.png)`,
-    //         // backgroundImage: `url(https://animated-gif-creator.com/images/03/animated-logo-gifs-get-the-best-gif-on-giphy_33.gif)`,
+    <div className={""}>
+      <div className={"sticky top-28 h-[30vh]"}>
+        <Heading heading={"Our Services"}></Heading>
+      </div>
+      <div ref={container} className={"max-w-[90%] mx-auto space-y-16 my-12 "}>
+        {services.map((service, idx) => {
+          const targetScale = 1 - (services.length - idx) * 0.05;
+          console.log(targetScale);
+          const range = [idx * 0.25, 1];
+          const scale = useTransform(scrollYProgress, range, [1, targetScale]);
+          const opacity = useTransform(scrollYProgress, [1, 1], [0, 1]);
 
-    //         backgroundRepeat: "no-repeat",
-    //       }}
-    //     >
-    //       <div
-    //         className={
-    //           "text-white text-7xl lg:text-[300px] lg:leading-[250px] font-extrabold uppercase text-center font-serif"
-    //         }
-    //       >
-    //         Our Services
-    //       </div>
-    //     </motion.div>
-    //     <div className="absolute bottom-0 left-0 right-0 h-screen bg-gradient-to-b from-zinc-950/0 to-black" />
-
-    //     <div className=" flex flex-col gap-10 px-2 lg:px-0 ">
-    //       {services.map((service, idx) => (
-    //         <div
-    //           key={idx}
-    //           className={"flex justify-center lg:flex-col h-screen p-3"}
-    //         >
-    //           <ParallaxCard start={80} end={80} className={" w-full"}>
-    //             <motion.div
-    //               whileInView={{ opacity: 1, x: 0, repeatDur: 0.5 }} // Animates to full opacity and original Y position
-    //               initial={{
-    //                 opacity: 0,
-    //                 x: idx % 2 === 0 ? -100 : 100,
-    //               }} // Starts with hidden state and off-screen
-    //               transition={{
-    //                 duration: 0.5,
-    //               }} // Controls the speed of the animation
-    //               viewport={{ amount: 0.5 }}
-    //               className={
-    //                 "flex flex-col-reverse lg:flex-row items-center justify-center lg:w-[70%]  lg:mx-auto  h-[60vh] bg-gray-700 bg-opacity-70 p-6 text-white rounded-lg gap-4 relative"
-    //               }
-    //             >
-    //               <div className={"lg:w-1/2"}>
-    //                 <h1 className={"font-bold text-3xl"}>{service.name}</h1>
-    //                 <h1>{service.description}</h1>
-    //                 <div>
-    //                   {service.offerings.map((offer, idx) => (
-    //                     <h1 key={idx}>{offer}</h1>
-    //                   ))}
-    //                 </div>
-    //               </div>
-    //               <motion.div
-    //                 initial={{ scale: 0.7 }}
-    //                 whileInView={{
-    //                   scale: 1.2,
-    //                   repeatDur: 0.5,
-    //                   transition: {
-    //                     duration: 0.5,
-    //                   },
-    //                 }}
-    //                 className={"lg:w-1/2"}
-    //               >
-    //                 <Image
-    //                   className={
-    //                     "rounded-2xl lg:absolute lg:-right-[2%] lg:top-[50%] lg:-translate-y-[50%] shadow-lg shadow-zinc-600"
-    //                   }
-    //                   src={service.image}
-    //                   alt={service.name}
-    //                   width={600}
-    //                   height={400}
-    //                 />
-    //               </motion.div>
-    //             </motion.div>
-    //           </ParallaxCard>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
-    <div></div>
+          return (
+            <div
+              ref={cardRef}
+              key={idx}
+              className={
+                "h-screen sticky top-0 flex items-center justify-center z-10"
+              }
+            >
+              {/* card */}
+              <motion.div
+                initial={{ x: -50, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                style={{
+                  top: `calc(25% + ${idx * 30}px)`,
+                  scale,
+                  opacity,
+                }}
+                className={`w-full p-6 bg-slate-50 lg:p-10 flex flex-col lg:flex-row-reverse gap-16 items-center shadow-lg rounded-2xl h-[500px] absolute border border-gray-200 scale-[80%]`}
+              >
+                <Image
+                  className={"rounded-2xl"}
+                  src={service.image}
+                  width={600}
+                  height={400}
+                  alt={service.name}
+                />
+                <div className={"space-y-3"}>
+                  <h1 className={"text-lg font-bold"}>{service.name}</h1>
+                  <p>{service.description}</p>
+                  <ul className={"ml-5 flex flex-col lg:flex-row lg:gap-8"}>
+                    {service.offerings.map((offer, idx) => (
+                      <li className={"list-item list-disc font-md"} key={idx}>
+                        {offer}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 

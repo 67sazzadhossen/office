@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <Script
         src="
 https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js

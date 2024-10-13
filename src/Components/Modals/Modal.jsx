@@ -15,7 +15,7 @@ const Modal = ({
   heading,
   loadedTitle,
 }) => {
-  console.log(loadedImage);
+  // console.log(loadedImage);
   const { register, handleSubmit, reset } = useForm();
   const image_hosting_url = process.env.NEXT_PUBLIC_IMAGE_HOSTING_URL;
   const [isLogoUploading, setIsLogoUploading] = useState(false);

@@ -49,10 +49,6 @@ const OurServices = () => {
     offset: ["start start", "end end"],
   });
 
-  useEffect(() => {
-    scrollYProgress.on("change", (e) => console.log(scrollYProgress.current));
-  }, []);
-
   return (
     <div className={""}>
       <div className={"sticky top-28 h-[30vh]"}>

@@ -61,6 +61,7 @@ const OurServices = () => {
 
           return (
             <Card
+              key={idx}
               service={service}
               idx={idx}
               progress={scrollYProgress}

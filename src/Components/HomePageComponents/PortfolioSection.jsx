@@ -58,9 +58,9 @@ const PortfolioSection = () => {
             {projects?.map((project, index) => (
               <div
                 key={index}
-                className="w-[50%] card card-compact h-[75%] shadow-xl flex  bg-base-200  text-2xl"
+                className="w-[50%] card card-compact h-[50%] shadow-xl flex  bg-base-200  text-2xl relative"
               >
-                <figure className={"h-2/3 overflow-hidden"}>
+                <figure className={"h-3/4 overflow-hidden"}>
                   <Image
                     src={project.url}
                     alt="Shoes"
@@ -68,7 +68,7 @@ const PortfolioSection = () => {
                     height={600}
                   />
                 </figure>
-                <div className="card-body text-black text-start">
+                <div className="card-body text-black text-start h-1/3">
                   <h2 className="card-title text-start">{project.name}</h2>
                   <p>{project.description}</p>
                   <ul className={"flex gap-3"}>
@@ -79,16 +79,17 @@ const PortfolioSection = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
-                  </div>
+
+                  <button className="btn btn-xs btn-outline absolute right-4 bottom-4">
+                    View details
+                  </button>
                 </div>
               </div>
             ))}
 
             <Link
               href={"/portfolio"}
-              className="w-svw card card-compact h-[75%] shadow-xl flex justify-center items-center text-6xl font-extrabold"
+              className="w-svw card card-compact h-[50%] shadow-xl flex justify-center items-center text-6xl font-extrabold"
             >
               View All
             </Link>

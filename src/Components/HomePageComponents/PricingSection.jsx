@@ -60,13 +60,13 @@ const PricingSection = () => {
   ];
 
   return (
-    <div>
-      <div className={"text-center mb-16"}>
+    <div className={"px-5 lg:px-0"}>
+      <div className={"text-center my-16"}>
         <Heading heading={"Our Pricing"}></Heading>
       </div>
       <div
         className={
-          "grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-6 lg:max-w-[90%] lg:mx-auto"
+          "grid grid-cols-1 gap-12 md:grid-cols-3 lg:gap-6 lg:max-w-[90%] lg:mx-auto"
         }
       >
         {plans.map((plan, idx) => (

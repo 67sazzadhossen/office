@@ -66,7 +66,7 @@ const AboutUsSection = () => {
         </div>
         <div className={"lg:w-2/3"}>
           {data.values.list.map((item, idx) => (
-            <div className={"flex lg:items-center gap-4 py-3 "}>
+            <div key={idx} className={"flex lg:items-center gap-4 py-3 "}>
               <h1 className={"font-bold w-1/3 border-b border-gray-300 py-2"}>
                 {item.title}
               </h1>{" "}

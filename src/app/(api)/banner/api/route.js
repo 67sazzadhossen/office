@@ -29,7 +29,7 @@ export const GET = async (request) => {
     const db = await connectDb();
     const bannerCollection = db.collection("bannerCollection");
     const res = await bannerCollection.find().toArray();
-    return NextResponse.json({ message: "success", data:res });
+    return NextResponse.json({ message: "success", data: res });
   } catch (error) {
     return NextResponse.json({ message: "error" });
   }

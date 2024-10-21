@@ -59,7 +59,7 @@ const HeroSection = () => {
           className={"w-full lg:w-2/3 space-y-6"}
         >
           <h1 className={"lg:text-5xl text-2xl font-bold leading-snug"}>
-            {data?.data[0].title || ""}
+            {data?.data[0]?.title || ""}
           </h1>
           <button className={"btn btn-outline"}>Start a project with us</button>
           {isAdmin && (

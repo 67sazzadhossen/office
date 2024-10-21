@@ -1,4 +1,5 @@
 "use client";
+import AboutUsSection from "@/Components/HomePageComponents/AboutUsSection";
 import HeroSection from "@/Components/HomePageComponents/HeroSection";
 import OurServices from "@/Components/HomePageComponents/OurServices";
 import PortfolioSection from "@/Components/HomePageComponents/PortfolioSection";
@@ -12,6 +13,7 @@ const HomePage = () => {
       <OurServices></OurServices>
       <PortfolioSection></PortfolioSection>
       <PricingSection></PricingSection>
+      <AboutUsSection></AboutUsSection>
     </MainLayout>
   );
 };

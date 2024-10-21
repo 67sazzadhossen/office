@@ -61,10 +61,11 @@ const SignUpPage = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen bg-black flex justify-center flex-col py-24 text-white items-center">
+        <div className="min-h-screen flex justify-center flex-col py-24 items-center">
+          <h1 className={" text-2xl font-bold py-12"}>Please Sign Up</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className=" w-1/3 border border-gray-800 p-8 rounded-xl backdrop-blur-lg shadow-inner"
+            className=" lg:w-1/3 w-[80%] border shadow-xl p-8 rounded-xl backdrop-blur-lg "
           >
             <div className="form-control">
               <label className="label">
@@ -106,7 +107,7 @@ const SignUpPage = () => {
               </label>
               <input
                 type="file"
-                className="file-input file-input-info file-input-bordered w-full "
+                className="file-input file-input-bordered w-full "
                 {...register("image", { required: true })}
               />
               <label className="label">
@@ -122,9 +123,7 @@ const SignUpPage = () => {
               <button className="btn btn-primary">Sign Up</button>
             </div>
           </form>
-          <div className={"divider divider-neutral w-1/4 mx-auto"}>
-            Or Login With
-          </div>
+          <div className={"divider w-3/4 lg:w-1/4 mx-auto"}>Or Login With</div>
           <SocialLogin></SocialLogin>
           <ToastContainer />
         </div>

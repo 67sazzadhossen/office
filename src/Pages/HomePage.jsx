@@ -5,6 +5,7 @@ import OurServices from "@/Components/HomePageComponents/OurServices";
 import PortfolioSection from "@/Components/HomePageComponents/PortfolioSection";
 import PricingSection from "@/Components/HomePageComponents/PricingSection";
 import TestimonialSection from "@/Components/HomePageComponents/TestimonialSection";
+import TouchSection from "@/Components/HomePageComponents/TouchSection";
 import MainLayout from "@/Layout/MainLayout";
 
 const HomePage = () => {
@@ -16,6 +17,7 @@ const HomePage = () => {
       <PricingSection></PricingSection>
       <AboutUsSection></AboutUsSection>
       <TestimonialSection></TestimonialSection>
+      <TouchSection></TouchSection>
     </MainLayout>
   );
 };

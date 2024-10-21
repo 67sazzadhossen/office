@@ -8,9 +8,12 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   const { isAdmin } = useLoggedUser();
   const [data, refetch] = useLoadData("banner");
-  console.log(data.data[0]);
-  const title = data?.data[0].title;
-  const image = data?.data[0].image;
+
+  // Ensure that data and data.data are defined before trying to access them
+  const bannerData = data?.data?.[0];
+  const title = bannerData?.title || "Default Title"; // Provide a default title if data is missing
+  const image = bannerData?.image || "default-image-url"; // Provide a default image if data is missing
+
   return (
     <div
       className={
@@ -23,9 +26,7 @@ const HeroSection = () => {
           opacity: 1,
           scaleX: 1.6,
           scaleY: 1.3,
-
           rotateX: "-45deg",
-
           transition: {
             type: "tween",
             stiffness: 180,
@@ -49,7 +50,7 @@ const HeroSection = () => {
         }
       >
         <motion.div
-          initial={{ opacity: 0, x: -100, repeatDur: 0.5 }} // Initial state (invisible and off-screen)
+          initial={{ opacity: 0, x: -100 }} // Initial state (invisible and off-screen)
           whileInView={{ opacity: 1, x: 0 }} // Becomes visible when in view
           exit={{ opacity: 0, x: -100 }} // Disappears when out of view
           transition={{
@@ -61,7 +62,7 @@ const HeroSection = () => {
           className={"w-full lg:w-2/3 space-y-6"}
         >
           <h1 className={"lg:text-5xl text-2xl font-bold leading-snug"}>
-            {title || ""}
+            {title}
           </h1>
           <button className={"btn btn-outline"}>Start a project with us</button>
           {isAdmin && (
@@ -80,7 +81,7 @@ const HeroSection = () => {
           )}
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: 100, repeatDur: 0.5 }} // Initial state (invisible and off-screen)
+          initial={{ opacity: 0, x: 100 }} // Initial state (invisible and off-screen)
           whileInView={{ opacity: 1, x: 0 }} // Becomes visible when in view
           exit={{ opacity: 0, x: "100vh" }} // Disappears when out of view
           transition={{

@@ -48,7 +48,7 @@ const AboutUsSection = () => {
 
   return (
     <div className={"max-w-[90%] mx-auto"}>
-      <div className={"my-12 text-center"}>
+      <div className={"my-16 text-center"}>
         <Heading heading={data.title}></Heading>
       </div>
 

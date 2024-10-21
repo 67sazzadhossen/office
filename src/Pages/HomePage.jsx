@@ -4,6 +4,7 @@ import HeroSection from "@/Components/HomePageComponents/HeroSection";
 import OurServices from "@/Components/HomePageComponents/OurServices";
 import PortfolioSection from "@/Components/HomePageComponents/PortfolioSection";
 import PricingSection from "@/Components/HomePageComponents/PricingSection";
+import TestimonialSection from "@/Components/HomePageComponents/TestimonialSection";
 import MainLayout from "@/Layout/MainLayout";
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
       <PortfolioSection></PortfolioSection>
       <PricingSection></PricingSection>
       <AboutUsSection></AboutUsSection>
+      <TestimonialSection></TestimonialSection>
     </MainLayout>
   );
 };

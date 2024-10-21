@@ -39,7 +39,7 @@ const HeroSection = () => {
       >
         <Image
           src={"https://i.ibb.co/Y23YNzX/Ripple.png"}
-          layout={"fill"}
+          fill
           alt={"background"}
         ></Image>
       </motion.div>

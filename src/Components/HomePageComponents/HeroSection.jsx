@@ -8,7 +8,9 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   const { isAdmin } = useLoggedUser();
   const [data, refetch] = useLoadData("banner");
-  // console.log(data?.data[0]);
+  console.log(data.data[0]);
+  const title = data?.data[0].title;
+  const image = data?.data[0].image;
   return (
     <div
       className={
@@ -59,7 +61,7 @@ const HeroSection = () => {
           className={"w-full lg:w-2/3 space-y-6"}
         >
           <h1 className={"lg:text-5xl text-2xl font-bold leading-snug"}>
-            {data?.data[0]?.title || ""}
+            {title || ""}
           </h1>
           <button className={"btn btn-outline"}>Start a project with us</button>
           {isAdmin && (
@@ -68,8 +70,8 @@ const HeroSection = () => {
                 apiName="banner"
                 buttonName={"Update Banner"}
                 id={"updateBannerModal"}
-                loadedImage={data?.data[0]?.image}
-                loadedTitle={data?.data[0]?.title}
+                loadedImage={image}
+                loadedTitle={title}
                 refetch={refetch}
                 heading={"Customize Your Banner"}
                 input={["description"]}
@@ -92,7 +94,7 @@ const HeroSection = () => {
           <Image
             className={"rounded-3xl "}
             src={
-              data?.data[0].image ||
+              image ||
               "http://localhost:3000/_next/image?url=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Fmax_1200%2F335c79145455835.629ef2634f695.png&w=1200&q=75"
             }
             alt={"Hero Image"}

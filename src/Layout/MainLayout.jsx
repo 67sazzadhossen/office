@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/Components/Shared/Footer/Footer";
 import Navbar from "@/Components/Shared/Navbar/Navbar";
 import useLoadData from "@/Hooks/useLoadData";
 
@@ -17,7 +18,7 @@ const MainLayout = ({ children }) => {
         <div>
           <Navbar></Navbar>
           <div className="">{children}</div>
-          <footer>Footer</footer>
+          <Footer></Footer>
         </div>
       )}
     </div>

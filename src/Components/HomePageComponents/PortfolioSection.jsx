@@ -45,17 +45,20 @@ const PortfolioSection = () => {
       {/* for deskstop */}
       <div className="lg:min-h-screen text-black">
         {/* Horizontal scrolling section */}
+
+        <h1 className={"sticky top-24 text-center text-3xl font-bold"}>
+          Portfolio
+        </h1>
         <section
           ref={containerRef}
           className="relative overflow-hidden h-screen hidden lg:block"
         >
           <div
             ref={horizontalRef}
-            className="flex space-x-4 h-full items-center"
+            className="flex space-x-4 h-full items-center px-8"
             style={{ width: "200vw" }} // Make the content wide enough to scroll horizontally
           >
             {/* Horizontal scroll content */}
-            <div className={"text-6xl px-36 font-bold"}>Portfolio</div>
 
             {projects?.map((project, index) => (
               <div

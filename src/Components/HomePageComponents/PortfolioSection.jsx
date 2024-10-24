@@ -9,7 +9,7 @@ import Heading from "../Shared/Heading/Heading";
 
 const PortfolioSection = () => {
   const [data] = useLoadData("portfolio");
-  const projects = data?.data?.slice(0, 4);
+  const projects = data?.data?.slice(0, 3);
   const containerRef = useRef(null);
   const horizontalRef = useRef(null);
 
@@ -47,7 +47,7 @@ const PortfolioSection = () => {
 
         <h1
           className={
-            "sticky top-24 h-[350px] text-center text-3xl font-bold hidden lg:block"
+            "sticky top-24 h-[400px] text-center text-3xl font-bold hidden lg:block"
           }
         >
           Portfolio
@@ -58,7 +58,7 @@ const PortfolioSection = () => {
         >
           <div
             ref={horizontalRef}
-            className="flex space-x-4 h-full items-center px-8 "
+            className="flex space-x-4 h-screen items-center px-8 "
             style={{ width: "200vw" }} // Make the content wide enough to scroll horizontally
           >
             {/* Horizontal scroll content */}

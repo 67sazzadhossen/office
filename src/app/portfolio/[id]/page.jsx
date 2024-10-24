@@ -34,7 +34,7 @@ const ProjectDetails = ({ params }) => {
           </div>
         </div>
       ) : (
-        <div className={"py-20 lg:max-w-[90%] mx-auto"}>
+        <div className={"py-20 lg:max-w-[90%] mx-auto px-4 lg:px-0"}>
           <h1 className={"text-2xl lg:text-5xl font-semibold"}>
             {projectDetails?.name}
           </h1>

@@ -46,7 +46,11 @@ const PortfolioSection = () => {
       <div className="lg:min-h-screen text-black">
         {/* Horizontal scrolling section */}
 
-        <h1 className={"sticky top-24 text-center text-3xl font-bold"}>
+        <h1
+          className={
+            "sticky top-24 text-center text-3xl font-bold hidden lg:block"
+          }
+        >
           Portfolio
         </h1>
         <section

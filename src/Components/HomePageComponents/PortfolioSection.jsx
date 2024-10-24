@@ -82,9 +82,12 @@ const PortfolioSection = () => {
                     ))}
                   </ul>
 
-                  <button className="btn btn-xs btn-outline absolute right-4 bottom-4">
+                  <Link
+                    href={`/portfolio/${project._id}`}
+                    className="btn btn-xs btn-outline absolute right-4 bottom-4"
+                  >
                     View details
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

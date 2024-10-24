@@ -6,13 +6,14 @@ import useLoadData from "@/Hooks/useLoadData";
 import useLoggedUser from "@/Hooks/useLoggedUser";
 import MainLayout from "@/Layout/MainLayout";
 import Image from "next/image";
+import Link from "next/link";
 
 const PortfolioPage = () => {
   const { isAdmin } = useLoggedUser();
   const [data, , isLoading] = useLoadData("portfolio");
   const projects = data?.data;
 
-  console.log(projects);
+  console.log(projects, isLoading);
 
   // const projects = [
   //   {
@@ -128,9 +129,9 @@ const PortfolioPage = () => {
           <LoadingInfinite> </LoadingInfinite>
         </div>
       ) : (
-        <div className="bg-black py-20 text-white">
+        <div className=" py-20 ">
           <div className=" text-center py-6">
-            <h1 className="">Projects</h1>
+            <h1 className="font-bold text-3xl">Projects</h1>
             <div className="py-4">
               {isAdmin && (
                 <Modal
@@ -149,23 +150,33 @@ const PortfolioPage = () => {
               )}
             </div>
           </div>
-          <div className="grid grid-cols-3 max-w-[85%] mx-auto gap-6 text-black">
-            {projects?.map((project, idx) => (
-              <div key={idx} className={`card bg-base-100 shadow-xl`}>
-                <figure>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[85%] mx-auto gap-12 text-black">
+            {projects?.map((project, index) => (
+              <div
+                key={index}
+                className="card card-compact shadow-xl flex h-[450px] lg:h-[500px] bg-base-200  text-2xl relative"
+              >
+                <figure className={"lg:h-1/2 overflow-hidden"}>
                   <Image
-                    src={project.image}
-                    alt="Shoes"
-                    width={800}
-                    height={400}
+                    src={project.url}
+                    alt={project.name}
+                    width={1400}
+                    height={800}
                   />
                 </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{project.name}</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
-                  </div>
+                <div className="card-body text-black text-start h-1/2">
+                  <h2 className="card-title text-start">{project.name}</h2>
+                  <p>{project.description}</p>
+                  <p className={"-mt-12 lg:mt-0"}>
+                    Technologies : {project.technologies}
+                  </p>
+
+                  <Link
+                    href={`/portfolio/${project._id}`}
+                    className="btn btn-xs btn-outline absolute right-4 bottom-4"
+                  >
+                    View details
+                  </Link>
                 </div>
               </div>
             ))}

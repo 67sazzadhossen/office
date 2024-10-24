@@ -120,7 +120,7 @@ const PortfolioPage = () => {
 
   return (
     <MainLayout>
-      {isLoading ? (
+      {isLoading || projects === "undefined" ? (
         <div
           className={
             "h-screen text-white bg-black justify-center items-center flex"

@@ -9,7 +9,7 @@ import Heading from "../Shared/Heading/Heading";
 
 const PortfolioSection = () => {
   const [data] = useLoadData("portfolio");
-  const projects = data?.data?.slice(0, 3);
+  const projects = data?.data?.slice(0, 4);
   const containerRef = useRef(null);
   const horizontalRef = useRef(null);
 

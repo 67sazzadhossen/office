@@ -37,7 +37,7 @@ const PortfolioSection = () => {
         horizontalScroll.scrollTrigger.kill(); // Clean up the ScrollTrigger when the component unmounts
       }
     };
-  }, [projects.lenght]);
+  }, [projects?.lenght]);
 
   return (
     <>

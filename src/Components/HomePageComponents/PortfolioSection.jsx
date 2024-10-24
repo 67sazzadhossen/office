@@ -8,6 +8,7 @@ import useLoadData from "@/Hooks/useLoadData";
 import Heading from "../Shared/Heading/Heading";
 
 const PortfolioSection = () => {
+  const cards = [0, 1, 2];
   const [data] = useLoadData("portfolio");
   const projects = data?.data?.slice(0, 3);
   const containerRef = useRef(null);
@@ -37,7 +38,7 @@ const PortfolioSection = () => {
         horizontalScroll.scrollTrigger.kill(); // Clean up the ScrollTrigger when the component unmounts
       }
     };
-  }, [projects?.lenght]);
+  }, [cards.lenght]);
 
   return (
     <>

@@ -8,7 +8,6 @@ import useLoadData from "@/Hooks/useLoadData";
 import Heading from "../Shared/Heading/Heading";
 
 const PortfolioSection = () => {
-  const cards = [0, 1, 2];
   const [data] = useLoadData("portfolio");
   const projects = data?.data?.slice(0, 3);
   const containerRef = useRef(null);
@@ -21,11 +20,11 @@ const PortfolioSection = () => {
 
     const horizontalScroll = gsap.to(horizontalElement, {
       x: -scrollLength, // Scroll the content to the left
-      ease: "none",
+      ease: "power1.out",
       scrollTrigger: {
         trigger: containerRef.current, // Trigger when the section enters the viewport
         pin: true, // Pin the section while scrolling horizontally
-        scrub: true, // Link the scroll progress to the animation
+        scrub: 0.9, // Link the scroll progress to the animation
         start: "top top", // Start horizontal scroll when the top of the section hits the top of the viewport
         end: () => `+=${horizontalElement.scrollWidth}`, // End when the full width of the content is scrolled through
         invalidateOnRefresh: true, // Recalculate on window resize
@@ -38,28 +37,28 @@ const PortfolioSection = () => {
         horizontalScroll.scrollTrigger.kill(); // Clean up the ScrollTrigger when the component unmounts
       }
     };
-  }, [projects?.lenght + 1]);
+  }, [projects?.lenght]);
 
   return (
     <>
       {/* for deskstop */}
-      <div className="lg:min-h-screen text-black">
+      <div className="lg:min-h-screen text-black relative">
         {/* Horizontal scrolling section */}
 
         <h1
           className={
-            "sticky top-24 h-[300px] text-center text-3xl font-bold hidden lg:block"
+            "sticky top-24 h-[350px] text-center text-3xl font-bold hidden lg:block"
           }
         >
           Portfolio
         </h1>
         <section
           ref={containerRef}
-          className="relative overflow-hidden h-screen hidden lg:block"
+          className=" overflow-hidden h-screen hidden lg:block"
         >
           <div
             ref={horizontalRef}
-            className="flex space-x-4 h-full items-center px-8"
+            className="flex space-x-4 h-full items-center px-8 "
             style={{ width: "200vw" }} // Make the content wide enough to scroll horizontally
           >
             {/* Horizontal scroll content */}

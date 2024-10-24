@@ -6,6 +6,7 @@ import PortfolioSection from "@/Components/HomePageComponents/PortfolioSection";
 import PricingSection from "@/Components/HomePageComponents/PricingSection";
 import TestimonialSection from "@/Components/HomePageComponents/TestimonialSection";
 import TouchSection from "@/Components/HomePageComponents/TouchSection";
+import Trysection from "@/Components/HomePageComponents/Trysection";
 import MainLayout from "@/Layout/MainLayout";
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
       <HeroSection></HeroSection>
       <OurServices></OurServices>
       <PortfolioSection></PortfolioSection>
+      {/* <Trysection></Trysection> */}
       <PricingSection></PricingSection>
       <AboutUsSection></AboutUsSection>
       <TestimonialSection></TestimonialSection>

@@ -5,18 +5,12 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 import useLoggedUser from "@/Hooks/useLoggedUser";
 import useLoadData from "@/Hooks/useLoadData";
-import Modal from "@/Components/Modals/Modal";
-import { animate, motion } from "framer-motion";
-import { IoMdLogIn } from "react-icons/io";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, isAdmin, status } = useLoggedUser();
-  // console.log(user, isAdmin, status);
 
   const authenticated = status === "authenticated";
-  const [data, refetch] = useLoadData("navbar");
-  // console.log(data.data[0]);
-
   const [isOpen, setIsOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -27,17 +21,18 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
 
   const closeDropdown = (e) => {
-    // Close the dropdown only if clicking outside of it
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-      setClicked(false);
+      setIsOpen(false);
     }
   };
+
   useEffect(() => {
     document.addEventListener("mousedown", closeDropdown);
     return () => {
       document.removeEventListener("mousedown", closeDropdown);
     };
   }, []);
+
   const links = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -46,140 +41,49 @@ const Navbar = () => {
     { name: "Contact", path: "/contact" },
   ];
 
+  // Function to close the navbar when a link is clicked
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close the dropdown
+  };
+
   return (
     <motion.div
-      initial={{
-        y: -100,
-      }}
-      animate={{
-        y: 0,
-        transition: {
-          duration: 0.3,
-        },
-      }}
+      initial={{ y: -100 }}
+      animate={{ y: 0, transition: { duration: 0.3 } }}
       className="fixed w-full z-[9999]"
     >
-      {/* <nav className="">
-        <div className=" flex justify-between">
-          {data && (
-            <div className={""}>
-              <SideMenu links={links}></SideMenu>
-              <Image
-                src={data?.data[0]?.image}
-                width={60}
-                height={60}
-                alt="logo"
-              ></Image>
-            </div>
-          )}
-          {isAdmin && (
-            <Modal
-              apiName="navbar"
-              buttonName={"Update Navbar"}
-              id={"updateNavModal"}
-              loadedImage={data?.data[0]?.image}
-              refetch={refetch}
-              heading={"Customize Your Logo"}
-            ></Modal>
-          )}
-        </div>
-        <div>
-          <ul className="">
-            {links.map((link, idx) => (
-              <Link key={idx} href={link.path}>
-                {link.name}
-              </Link>
-            ))}
-          </ul>
-        </div>
-        <div className="">
-          {authenticated ? (
-            <div>
-              <div>
-                <div className="dropdown dropdown-end">
-                  <div
-                    tabIndex={1}
-                    role="button"
-                    className="btn btn-ghost rounded-btn"
-                    onClick={toggleDropdown} // Toggling dropdown visibility
-                    // Close the dropdown when clicking outside
-                  >
-                    <Image
-                      className={"rounded-full"}
-                      src={user.image}
-                      width={50}
-                      height={50}
-                      alt={"profile"}
-                    ></Image>
-                  </div>
-                  {isOpen && (
-                    <ul onBlur={closeDropdown} className="">
-                      <p>{user.name}</p>
-                      <p>{user.email}</p>
-
-                      <button className={""} onClick={signOut}>
-                        Logout
-                      </button>
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="">
-              <Link href={"/login"}>Login</Link>
-              <Link href={"/sign-up"}>Sign Up</Link>
-            </div>
-          )}
-        </div>
-      </nav> */}
-
-      <motion.nav
-        className={
-          "fixed flex justify-between items-center px-2 lg:px-10 py-3 w-full  z-50  text-black"
-        }
-      >
+      <motion.nav className="fixed flex justify-between items-center px-2 lg:px-10 py-3 w-full  z-50  text-black">
         <motion.div
           variants={{
             open: {
-              height: "80vh", // Set the target height
+              height: "80vh",
               y: "calc(40vh - 40px)",
-              transition: {
-                duration: 0.5,
-              },
+              transition: { duration: 0.5 },
             },
             closed: {
               height: "60px",
               y: 0,
-              transition: {
-                duration: 0.5,
-                delay: 0.3,
-              },
+              transition: { duration: 0.5, delay: 0.3 },
             },
           }}
           initial="closed"
           animate={isOpen ? "open" : "closed"}
-          style={{ transformOrigin: "bottom" }} // Apply transformOrigin directly as a style
-          className={
-            "absolute  bg-slate-100 w-full left-0 z-40 bg-opacity-40 backdrop-blur-xl rounded-b-2xl "
-          }
+          style={{ transformOrigin: "bottom" }}
+          className="absolute bg-slate-100 w-full left-0 z-40 bg-opacity-40 backdrop-blur-xl rounded-b-2xl"
         >
-          <motion.ul
-            className={
-              "h-full w-full flex justify-center items-center flex-col gap-12 text-xl lg:text-3xl absolute"
-            }
-          >
+          <motion.ul className="h-full w-full flex justify-center items-center flex-col gap-12 text-xl lg:text-3xl absolute">
             {links.map((link, idx) => (
               <motion.li
+                key={idx}
                 initial={{ opacity: 0 }}
                 animate={isOpen ? "open" : "closed"}
                 variants={{
                   open: {
                     y: 0,
                     opacity: 1,
-                    pointerEvents: "auto", // Enable clicking when open
+                    pointerEvents: "auto",
                     transition: {
-                      delay: idx * 0.1, // Stagger open animation
+                      delay: idx * 0.1,
                       type: "spring",
                       stiffness: 80,
                     },
@@ -187,50 +91,47 @@ const Navbar = () => {
                   closed: {
                     y: "40vh",
                     opacity: 0,
-                    pointerEvents: "none", // Disable clicking when closed
+                    pointerEvents: "none",
                     transition: {
-                      delay: (links.length - idx) * 0.05, // Reverse stagger for closing
+                      delay: (links.length - idx) * 0.05,
                     },
                   },
                 }}
-                key={idx}
               >
-                <Link onClick={closeDropdown} href={link.path}>
+                <Link onClick={handleLinkClick} href={link.path}>
                   {link.name}
                 </Link>
               </motion.li>
             ))}
           </motion.ul>
         </motion.div>
+
         <Link
-          href={"/"}
-          className={
-            "text-xl lg:text-3xl font-extrabold tracking-tighter uppercase z-50"
-          }
+          href="/"
+          className="text-xl lg:text-3xl font-extrabold tracking-tighter uppercase z-50"
         >
           Web Innovators
         </Link>
 
-        {/* =========== Toggle Button ======= */}
-        <div className={"z-50 flex items-center gap-4"}>
+        <div className="z-50 flex items-center gap-4">
           <div className="relative" ref={dropdownRef}>
             {authenticated ? (
-              <motion.div className={"relative "}>
+              <motion.div className="relative">
                 <motion.div
                   onClick={() => setClicked(!clicked)}
-                  className="mask mask-squircle w-8 "
+                  className="mask mask-squircle w-8"
                 >
                   <Image
-                    className={""}
+                    className=""
                     src={user.image}
                     width={50}
                     height={50}
-                    alt={"profile"}
+                    alt="profile"
                   />
                 </motion.div>
                 <motion.div
                   animate={clicked ? "open" : "closed"}
-                  initial={"closed"}
+                  initial="closed"
                   variants={{
                     open: {
                       opacity: 1,
@@ -253,42 +154,32 @@ const Navbar = () => {
                       },
                     },
                   }}
-                  className={
-                    " shadow-md text-black bg-white bg-opacity-60 absolute right-[50%] translate-x-[50%] top-[150%] p-6 rounded-xl space-y-2 text-center"
-                  }
+                  className="shadow-md text-black bg-white bg-opacity-60 absolute right-[50%] translate-x-[50%] top-[150%] p-6 rounded-xl space-y-2 text-center"
                 >
                   <h1>{user.name}</h1>
                   <h1>{user.email}</h1>
-                  <button
-                    className={"btn btn-sm w-full"}
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
+                  <button className="btn btn-sm w-full" onClick={signOut}>
                     Log Out
                   </button>
                 </motion.div>
               </motion.div>
             ) : (
               <div className="flex items-center gap-2">
-                <Link href={"/login"} className={"flex gap-2 items-center "}>
-                  {/* <IoMdLogIn></IoMdLogIn> */}
-                  <button className={"btn btn-xs rounded-full"}>Login</button>
+                <Link href="/login" className="flex gap-2 items-center">
+                  <button className="btn btn-xs rounded-full">Login</button>
                 </Link>
-                <Link href={"/sign-up"} className={"flex gap-2 items-center"}>
-                  {/* <IoMdLogIn></IoMdLogIn> */}
-                  <button className={"btn btn-xs rounded-full"}>Sign Up</button>
+                <Link href="/sign-up" className="flex gap-2 items-center">
+                  <button className="btn btn-xs rounded-full">Sign Up</button>
                 </Link>
               </div>
             )}
           </div>
 
           <motion.div
-            tabIndex={0} // Make the div focusable
-            onBlur={closeDropdown}
+            tabIndex={0}
             onClick={toggleDropdown}
             animate={isOpen ? "open" : "closed"}
-            className={"space-y-1"}
+            className="space-y-1"
           >
             <motion.div
               variants={{
@@ -301,7 +192,7 @@ const Navbar = () => {
                   rotate: 0,
                 },
               }}
-              className={"h-[2px] w-5 bg-black rounded-full"}
+              className="h-[2px] w-5 bg-black rounded-full"
             ></motion.div>
             <motion.div
               variants={{
@@ -314,7 +205,7 @@ const Navbar = () => {
                   rotate: 0,
                 },
               }}
-              className={"h-[2px] w-5 bg-black rounded-full"}
+              className="h-[2px] w-5 bg-black rounded-full"
             ></motion.div>
             <motion.div
               variants={{
@@ -327,7 +218,7 @@ const Navbar = () => {
                   rotate: 0,
                 },
               }}
-              className={"h-[2px] w-5 bg-black rounded-full"}
+              className="h-[2px] w-5 bg-black rounded-full"
             ></motion.div>
           </motion.div>
         </div>

@@ -20,41 +20,38 @@ const PortfolioSection = () => {
 
     const horizontalScroll = gsap.to(horizontalElement, {
       x: -scrollLength, // Scroll the content to the left
-      ease: "power1.out",
+      ease: "none",
       scrollTrigger: {
         trigger: containerRef.current, // Trigger when the section enters the viewport
         pin: true, // Pin the section while scrolling horizontally
-        scrub: 0.9, // Link the scroll progress to the animation
+        scrub: 0.5, // Link the scroll progress to the animation
         start: "top top", // Start horizontal scroll when the top of the section hits the top of the viewport
         end: () => `+=${horizontalElement.scrollWidth}`, // End when the full width of the content is scrolled through
-        invalidateOnRefresh: true, // Recalculate on window resize
       },
     });
 
     // Cleanup: Kill the ScrollTrigger instance on unmount
     return () => {
-      if (horizontalScroll.scrollTrigger) {
-        horizontalScroll.scrollTrigger.kill(); // Clean up the ScrollTrigger when the component unmounts
-      }
+      horizontalScroll.kill();
     };
   }, [projects?.lenght]);
 
   return (
     <>
       {/* for deskstop */}
-      <div className="lg:min-h-screen text-black relative">
+      <div className=" text-black relative">
         {/* Horizontal scrolling section */}
 
         <h1
           className={
-            "sticky top-24 h-[400px] text-center text-3xl font-bold hidden lg:block"
+            "sticky top-24 h-screen text-center text-3xl font-bold hidden lg:block"
           }
         >
           Portfolio
         </h1>
         <section
           ref={containerRef}
-          className=" overflow-hidden h-screen hidden lg:block"
+          className=" overflow-hidden hidden lg:block"
         >
           <div
             ref={horizontalRef}

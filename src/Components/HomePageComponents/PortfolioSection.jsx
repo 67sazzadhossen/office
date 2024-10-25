@@ -26,7 +26,7 @@ const PortfolioSection = () => {
         pin: true, // Pin the section while scrolling horizontally
         scrub: 0.5, // Link the scroll progress to the animation
         start: "top top", // Start horizontal scroll when the top of the section hits the top of the viewport
-        end: () => `+=${horizontalElement.scrollWidth}`, // End when the full width of the content is scrolled through
+        end: () => "6500", // End when the full width of the content is scrolled through
       },
     });
 

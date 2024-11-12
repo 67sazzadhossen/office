@@ -44,7 +44,7 @@ const PortfolioSection = () => {
 
         <h1
           className={
-            "sticky top-24 h-screen text-center text-3xl font-bold hidden lg:block"
+            "sticky top-24 h-[60vh] text-center text-3xl font-bold hidden lg:block"
           }
         >
           Portfolio

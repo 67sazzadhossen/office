@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const useLoadData = (apiName) => {
   console.log(apiName);
   const { data, refetch, isLoading } = useQuery({
-    queryKey: [...apiName],
+    queryKey: [apiName],
     queryFn: async () => {
       const { data } = await useAxios.get(`${apiName}/api`);
       return data;

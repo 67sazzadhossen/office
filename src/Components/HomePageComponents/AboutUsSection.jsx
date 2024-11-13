@@ -6,7 +6,7 @@ const AboutUsSection = () => {
   const data = {
     title: "About Us",
     intro:
-      "At [Your Company Name], we specialize in delivering top-tier web development solutions to help businesses establish a strong online presence. With a focus on innovation, creativity, and user-centric design, we bring your vision to life with cutting-edge technology and design excellence.",
+      "At Zinnodev, we specialize in delivering top-tier web development solutions to help businesses establish a strong online presence. With a focus on innovation, creativity, and user-centric design, we bring your vision to life with cutting-edge technology and design excellence.",
     mission: {
       heading: "Our Mission",
       description:
@@ -52,9 +52,11 @@ const AboutUsSection = () => {
         <Heading heading={data.title}></Heading>
       </div>
 
-      <div>{data.intro}</div>
-      <div className={"my-6 flex flex-col lg:flex-row lg:gap-6 items-center"}>
-        <div className={"lg:w-1/3"}>
+      <div className={"my-6 flex flex-col  lg:gap-6 items-center"}>
+        <div className={"flex flex-col lg:flex-row gap-4 items-center"}>
+          <div className={"md:text-xl font-semibold leading-relaxed"}>
+            {data.intro}
+          </div>
           <Image
             src={
               "https://img.freepik.com/premium-vector/professional-employees-programming-develop-design-concept_1332470-1454.jpg"
@@ -64,7 +66,7 @@ const AboutUsSection = () => {
             height={600}
           ></Image>
         </div>
-        <div className={"lg:w-2/3"}>
+        <div className={"w-full"}>
           {data.values.list.map((item, idx) => (
             <div key={idx} className={"flex lg:items-center gap-4 py-3 "}>
               <h1 className={"font-bold w-1/3 border-b border-gray-300 py-2"}>

@@ -168,7 +168,10 @@ const PortfolioPage = () => {
                   <h2 className="card-title text-start">{project.name}</h2>
                   <p>{project.description}</p>
                   <p className={"-mt-12 lg:mt-0"}>
-                    Technologies : {project.technologies}
+                    Technologies :{" "}
+                    {project?.technologies?.map((project, idx) => (
+                      <span className={"md:ml-2"}>{project}</span>
+                    ))}
                   </p>
 
                   <Link

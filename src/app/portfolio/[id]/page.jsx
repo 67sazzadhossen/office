@@ -1,6 +1,4 @@
 "use client";
-
-import LoadingInfinite from "@/Components/Shared/Loading/LoadingInfinite";
 import MainLayout from "@/Layout/MainLayout";
 import { useAxios } from "@/Services/useAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -38,11 +36,18 @@ const ProjectDetails = ({ params }) => {
           <h1 className={"text-2xl lg:text-5xl font-semibold"}>
             {projectDetails?.name}
           </h1>
-          <p className={"my-4 lg:w-1/2"}>{projectDetails?.description}</p>
-          <div>Technologies : {projectDetails.technologies}</div>
-          <div>Pages : {projectDetails.pages}</div>
-          <div>Price : ${projectDetails.price}</div>
+          <p className={"my-4 lg:w-1/2 font-semibold"}>
+            {projectDetails?.description}
+          </p>
           <div>
+            Technologies :{" "}
+            {projectDetails?.technologies?.map((project, idx) => (
+              <span className={"md:ml-2"}>{project}</span>
+            ))}
+          </div>
+          <div className={"mt-2"}>Pages : {projectDetails.pages}</div>
+          <div className={"mt-2"}>Price : ${projectDetails.price}</div>
+          <div className={"mt-2"}>
             <Image
               src={projectDetails?.url}
               alt={projectDetails?.name}

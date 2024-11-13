@@ -42,7 +42,9 @@ const ProjectDetails = ({ params }) => {
           <div>
             Technologies :{" "}
             {projectDetails?.technologies?.map((project, idx) => (
-              <span className={"md:ml-2"}>{project}</span>
+              <span key={idx} className={"md:ml-2"}>
+                {project}
+              </span>
             ))}
           </div>
           <div className={"mt-2"}>Pages : {projectDetails.pages}</div>

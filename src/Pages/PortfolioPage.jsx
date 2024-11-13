@@ -170,7 +170,9 @@ const PortfolioPage = () => {
                   <p className={"-mt-12 lg:mt-0"}>
                     Technologies :{" "}
                     {project?.technologies?.map((project, idx) => (
-                      <span className={"md:ml-2"}>{project}</span>
+                      <span key={idx} className={"md:ml-2"}>
+                        {project}
+                      </span>
                     ))}
                   </p>
 

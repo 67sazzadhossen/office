@@ -51,7 +51,6 @@ const Navbar = () => {
 
   return (
     <div>
-      {/* mobile nav */}
       <motion.div
         initial={{
           y: -100,
@@ -64,11 +63,12 @@ const Navbar = () => {
         }}
         className="fixed w-full z-[9999]"
       >
+        {/* mobile nav */}
         <motion.nav
           tabIndex={0}
           onBlur={closeNav}
           className={
-            "fixed flex justify-between items-center px-2 lg:px-10 py-3 w-full z-50  text-black"
+            "fixed flex justify-between items-center px-2 lg:px-10 py-3 w-full z-50  text-black md:hidden"
           }
         >
           <motion.div
@@ -145,7 +145,7 @@ const Navbar = () => {
 
           {/* =========== Toggle Button ======= */}
           <div className={"z-50 flex items-center gap-4"}>
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative hidden" ref={dropdownRef}>
               {authenticated ? (
                 <motion.div className={"relative "}>
                   <motion.div
@@ -265,6 +265,35 @@ const Navbar = () => {
             </motion.div>
           </div>
         </motion.nav>
+
+        {/* Desktop Nav */}
+
+        <nav
+          className={
+            "hidden md:flex justify-between px-2 lg:px-8 py-4 bg-slate-100 w-full left-0 z-40 bg-opacity-40 backdrop-blur-xl "
+          }
+        >
+          <div>
+            <Link
+              href={"/"}
+              className={
+                "text-xl lg:text-3xl font-extrabold tracking-tighter uppercase z-50"
+              }
+            >
+              <Image src={logo} alt={"logo"} width={150} height={40}></Image>
+            </Link>
+          </div>
+
+          <motion.ul
+            className={"flex gap-6 lg:gap-16 items-center font-semibold"}
+          >
+            {links.map((link, idx) => (
+              <motion.li key={idx}>
+                <Link href={link.path}>{link.name}</Link>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </nav>
       </motion.div>
     </div>
   );

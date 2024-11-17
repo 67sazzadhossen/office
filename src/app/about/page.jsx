@@ -6,7 +6,7 @@ const page = () => {
   const data = [
     {
       name: "Md Sazzad Hossen",
-      title: "Senion Web Developer",
+      title: "Senior Web Developer",
       description:
         "A senior web developer specializing in the MERN stack (MongoDB, Express, React, Node.js) with expertise in designing, building, and optimizing full-stack applications. Skilled in leading projects, mentoring teams, and ensuring high-quality, scalable solutions for complex web applications.",
       image:
@@ -14,7 +14,7 @@ const page = () => {
     },
     {
       name: "Md Takimul Hasan Nihal",
-      title: "Senion Web Developer",
+      title: "Senior Web Developer",
       description:
         "Senior Front-End Developer specializing in creating responsive, interactive, and visually appealing user interfaces using HTML, CSS, JavaScript, and modern frameworks. Expert in optimizing performance, ensuring cross-browser compatibility, and delivering seamless user experiences.",
       image:
@@ -57,7 +57,7 @@ const page = () => {
     <MainLayout>
       <div
         className={
-          "py-24 w-[90%] mx-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-16"
+          "py-24 w-[90%] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-16"
         }
       >
         {data.map((person, idx) => (

@@ -43,10 +43,10 @@ const Navbar = () => {
   }, []);
   const links = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
     { name: "Portfolio", path: "/portfolio" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about" },
+    // { name: "Contact", path: "/contact" },
   ];
 
   return (
